@@ -24,3 +24,16 @@ body {
 .errorBar {
   background-color: red;
 }
+
+
+:root{
+  --main-color: #0866FF;
+  --while: #FFFFFF;
+}
+::ng-deep .mat-mdc-tab-link .mdc-tab__text-label{
+  color: #FFF;
+}
+
+.pointer{
+  cursor: pointer;
+}
