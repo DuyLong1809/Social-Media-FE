@@ -1,0 +1,74 @@
+<div class="account-login">
+  <div class="container">
+    <header class="title">
+      <h1>Welcome to Social-Media</h1>
+      <div style="text-align: center">
+        <p>Log in to Social-Media</p>
+      </div>
+    </header>
+    <div class="content">
+      <div class="btn-login">
+        <button type="button" class="btn-login-gg">
+          <img
+            src="assets/image/image-login/gg-avatar.svg"
+            alt="Connection icon"
+          />
+          <span>Google</span>
+        </button>
+        <a style="text-decoration: none" id="login">
+          <button type="button" class="btn-login-dc">
+            <img
+              src="assets/image/image-login/discord-avatar.png"
+              alt="Connection icon"
+            />
+            <span>Discord</span>
+          </button>
+        </a>
+      </div>
+      <div class="Line"></div>
+      <div class="input-login">
+        <form method="" action="" [formGroup]="loginForm">
+          <mat-form-field appearance="outline" class="input">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" />
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="input">
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              [type]="hide ? 'password' : 'text'"
+              formControlName="password"
+            />
+            <button
+              type="button"
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide"
+            >
+              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            </button>
+          </mat-form-field>
+          <p class="forgot-password">
+            <a href="#"> Forgot password? </a>
+          </p>
+          <button
+            (click)="submitLogin()"
+            type="button"
+            class="btn-submit-input"
+            mat-raised-button
+          >
+            Continue
+          </button>
+        </form>
+        <div class="Sign-up">
+          <p>
+            Don't have an account?
+            <a style="cursor: pointer" (click)="openRegister()">Sign up</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

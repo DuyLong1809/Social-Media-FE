@@ -1,0 +1,57 @@
+.container{
+  width: 25vw;
+  padding: 17px;
+}
+.avatar-user{
+  width: 100%;
+  padding: 7px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.item{
+  margin-top: 8px;
+  width: 100%;
+  margin-left: 7px;
+  padding: 7px;
+  display: flex;
+  align-items: center;
+  gap: 21px;
+  cursor: pointer;
+}
+
+.avatar-user:hover{
+  background-color: #404040;
+  border-radius: 17px;
+}
+
+.item:hover{
+  background-color: #404040;
+  border-radius: 17px;
+}
+
+.avatar{
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.avatar-user img{
+  border-radius: 50%;
+}
+
+span{
+  color: #d2d2d2;
+  font-weight: 600;
+}
+
+mat-icon{
+  font-size: 24px;
+  color: #2c9aee;
+}

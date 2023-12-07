@@ -1,0 +1,138 @@
+.container {
+  background-color: #272727;
+  width: 500px;
+  padding: 10px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #6d6d6d;
+}
+
+.header span,
+.header mat-icon {
+  color: #d2d2d2;
+}
+
+.header span {
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.avatar-user {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.avatar-user img {
+  border-radius: 50%;
+}
+
+.content-header {
+  align-items: center;
+  display: flex;
+  padding: 10px;
+  gap: 10px;
+}
+
+.content-header span {
+  color: #d2d2d2;
+}
+
+.textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background-color: #272727;
+  color: rgb(207, 201, 191);
+  resize: none;
+  border: none;
+}
+
+.textarea::-webkit-scrollbar {
+  width: 10px;
+}
+
+.textarea::-webkit-scrollbar-thumb {
+  background-color: #333333;
+}
+
+.textarea::-webkit-scrollbar-track {
+  background-color: #272727;
+}
+
+.textarea:focus {
+  outline: none;
+}
+
+.input-file {
+  width: 100%;
+  background-color: #272727;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #666666;
+  height: 60px;
+  border-radius: 15px;
+  padding: 5px;
+}
+
+input::file-selector-button {
+  height: 100%;
+  cursor: pointer;
+  font-size: 16px;
+  border: none;
+  color: rgb(207, 201, 191);
+  background-color: rgb(36, 37, 37);
+  border-right: 1px solid rgb(70, 73, 73);
+}
+
+.input-file span {
+  color: #d2d2d2;
+  width: 230px;
+}
+
+.input-file input {
+  color: #d2d2d2;
+}
+
+.btn-submit {
+  width: 100%;
+}
+.img-post {
+  width: 100%;
+  height: auto;
+}
+
+.select-input-file {
+  height: 25px;
+  width: 100%;
+  border: 1px solid #353535;
+  border-radius: 10px;
+  padding-left: 5px;
+  padding-top: 2px;
+}
+
+.formPost{
+  overflow-y: auto;
+  height: 230px;
+}
+
+.formPost::-webkit-scrollbar {
+  width: 10px;
+}
+
+.formPost::-webkit-scrollbar-thumb {
+  background-color: #333333;
+}
+
+.formPost::-webkit-scrollbar-track {
+  background-color: #272727;
+}

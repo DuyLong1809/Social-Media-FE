@@ -1,0 +1,72 @@
+<div class="container">
+  <div>
+    <div class="header">
+      <span *ngIf="!editMode">Tạo Bài Viết</span>
+      <span *ngIf="editMode">Sửa Bài Viết</span>
+      <mat-icon style="cursor: pointer" mat-dialog-close>close</mat-icon>
+    </div>
+    <div class="content">
+      <div>
+        <div class="content-header">
+          <div class="avatar-user">
+            <img
+              width="100%"
+              height="100%"
+              src="../../../assets/image/8a818994-8aa5-4c5b-849f-5bec1804be4f.png"
+              alt=""
+            />
+          </div>
+          <span>{{ nameUser }}</span>
+        </div>
+        <form  action="" [formGroup]="postForm">
+          <div class="formPost">
+            <textarea
+              class="textarea"
+              id=""
+              rows="9"
+              placeholder="Bạn đang nghĩ gì thế?"
+              formControlName="content"
+            >
+            </textarea>
+            <div *ngIf="editMode" class="img-post">
+              <img
+                width="100%"
+                height="100%"
+                [src]="configUrl + '/images/' + postData.images[0].image_url"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="input-file">
+            <span>Thêm vào bài viết</span>
+            <div class="select-input-file">
+              <input type="file" (change)="onFileSelected($event)" />
+            </div>
+          </div>
+          <div style="width: 100%; margin-top: 20px">
+            <button
+              *ngIf="!editMode"
+              (click)="handleSubmit()"
+              type="button"
+              class="btn-submit"
+              mat-raised-button
+              color="primary"
+            >
+              Đăng bài viết
+            </button>
+            <button
+              *ngIf="editMode"
+              (click)="handleSubmit()"
+              type="button"
+              class="btn-submit"
+              mat-raised-button
+              color="primary"
+            >
+              Sửa bài viết
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

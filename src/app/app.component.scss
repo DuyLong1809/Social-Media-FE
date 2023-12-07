@@ -1,0 +1,22 @@
+.wrapper{
+  background-color: #272727;
+  height: auto
+}
+
+.content-wrapper{
+  width: 100%;
+  height: auto;
+  display: flex;
+}
+
+app-sidebar {
+  height: 100vh;
+  position: fixed;
+  top: 53px;
+  left: 0;
+}
+
+app-header{
+  position: fixed;
+  width: 100%;
+}

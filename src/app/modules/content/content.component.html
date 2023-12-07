@@ -1,0 +1,91 @@
+<div class="container">
+  <div class="content">
+    <div class="create-post">
+      <div class="create-post-up">
+        <div style="display: flex; gap: 10px; width: 100%">
+          <div class="avatar-user">
+            <img
+              width="100%"
+              height="100%"
+              src="../../../assets/image/8a818994-8aa5-4c5b-849f-5bec1804be4f.png"
+              alt=""
+            />
+          </div>
+          <div class="add-post" (click)="OpenDialogCreateEditPost(false, null)">
+            <span>Bạn đang nghĩ gì thế?</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngFor="let data of datas" class="posts">
+      <div class="content-posts">
+        <div class="header-post">
+          <div class="header-post-user">
+            <div class="av-user">
+              <img
+                width="100%"
+                height="100%"
+                src="../../../assets/image/8a818994-8aa5-4c5b-849f-5bec1804be4f.png"
+                alt=""
+              />
+            </div>
+            <div class="title">
+              <span>{{ data.user.name }}</span>
+              <div class="time">{{ timeAgo(data.updated_at) }}</div>
+            </div>
+          </div>
+          <div *ngIf="isPostOwner(data.user_id)">
+            <mat-icon [matMenuTriggerFor]="menu">more_horiz</mat-icon>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="OpenDialogCreateEditPost(true, data)">
+                <mat-icon style="color: #9d9d9d;">edit</mat-icon>
+                Chỉnh sửa bài viết
+              </button>
+              <button mat-menu-item (click)="OpenDialogConfirm(data.id, data.user_id)">
+                <mat-icon style="color: #9d9d9d;">delete</mat-icon>
+                Xóa bài viết
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+        <div class="content-new">
+          <p style="white-space: pre-line;">{{ data.content }}</p>
+          <div *ngIf="data.images" class="img-post">
+            <img
+              width="100%"
+              height="100%"
+              *ngIf="data.images[0]"
+              [src]="configUrl + '/images/' + data.images[0].image_url"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+      <div class="articles-posts">
+        <div>
+          <div class="articles-posts-up">
+            <span> 100k lượt thích </span>
+            <div style="display: flex; gap: 10px">
+              <span>50k lượt bình luận</span>
+              <span>40k lượt chia sẻ</span>
+            </div>
+          </div>
+          <div class="articles-posts-down">
+            <div class="article">
+              <mat-icon>favorite</mat-icon>
+              <span>Thích</span>
+            </div>
+            <div class="article">
+              <mat-icon>comment</mat-icon>
+              <span>Bình luận</span>
+            </div>
+            <div class="article">
+              <mat-icon>share</mat-icon>
+              <span>Chia sẻ</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

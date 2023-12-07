@@ -1,0 +1,147 @@
+.container {
+  width: 45vw;
+  padding: 20px;
+  margin-left: 400px;
+  margin-top: 50px;
+}
+
+.create-post {
+  width: 100%;
+  padding: 10px;
+  background-color: #3a3a3a;
+  border-radius: 15px;
+}
+
+.avatar-user {
+  width: 44px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.avatar-user img {
+  border-radius: 50%;
+}
+
+.av-user {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.av-user img {
+  border-radius: 50%;
+}
+
+.add-post {
+  width: 100%;
+  background-color: #555353;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.add-post:hover {
+  background-color: #686868;
+}
+
+.add-post span {
+  color: #d2d2d2;
+}
+
+.posts {
+  margin-top: 15px;
+  width: 100%;
+  padding: 10px;
+  background-color: #3a3a3a;
+  border-radius: 15px;
+}
+
+.header-post{
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-post mat-icon{
+  color: #9d9d9d;
+  cursor: pointer;
+}
+
+.header-post-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-post-user span {
+  color: #d2d2d2;
+  font-weight: 600;
+}
+
+.title .time {
+  font-size: 11px;
+  color: #807f7f;
+}
+
+.content-new {
+  margin-top: 15px;
+  color: #d2d2d2;
+}
+
+.img-post {
+  width: 100%;
+  height: auto;
+}
+
+.articles-posts {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.articles-posts-up {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #9f9f9f;
+  padding: 10px;
+}
+
+.articles-posts-up span {
+  color: #9d9d9d;
+}
+
+.articles-posts-down {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.article {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  width: 40%;
+  height: 30px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.article:hover {
+  background-color: #484848;
+}
+
+.article mat-icon {
+  color: #9d9d9d;
+}
+
+.article span {
+  color: #9d9d9d;
+}
