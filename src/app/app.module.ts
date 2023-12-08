@@ -15,6 +15,8 @@ import { ToKenAuth } from './core/interceptors/sample.interceptor';
 import { DialogConfirmComponent } from './modules/dialog-confirm/dialog-confirm.component';
 import { SnackBarComponent } from 'src/shared/snack-bar/snack-bar.component';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import { IntroduceComponent } from './modules/profile/introduce/introduce.component';
+import { FriendsComponent } from './modules/profile/friends/friends.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
     ContentComponent,
     DialogCreatePostComponent,
     ProfileComponent,
-    DialogConfirmComponent
+    DialogConfirmComponent,
+    IntroduceComponent,
+    FriendsComponent
   ],
   imports: [
     BrowserModule,

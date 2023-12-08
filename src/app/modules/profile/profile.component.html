@@ -1,9 +1,68 @@
-<div class="container">
-  <div class="sub-container">
-    <div class="header">
-      <div class="img-cover">
-        <img height="100%" width="100%" class="cover" src="../../../assets/image/mu.jpg" alt="">
+<div class="profile">
+  <div class="profile_content">
+    <div class="profile_content-head">
+      <div class="profile_content-head-banner">
+        <img class="cover" src="assets/image/mu.jpg" alt="">
       </div>
+
+        
+      <div class="info">
+        <div class="info-head">
+          <div class="info_avatar">
+            <img src="https://i.stack.imgur.com/l60Hf.png" alt="">
+            <div class="icon-absolute">
+              <img src="assets/image/svg/camera.svg" alt="">
+            </div>
+          </div>
+
+          <div class="info-head-content">
+            <h2 class="info-name">Nguyễn Quang Duy</h2>
+            <p class="number_of_friends">10 bạn bè</p>
+          </div>
+        </div>
+
+        <div class="info-body">
+          <div class="info-body-sub">
+            <div class="info-body-btn" style="background: var(--main-color)">
+              <div class="puls-icon">
+                <img src="assets/image/svg/add-circle.svg" alt="">
+              </div>
+              <p style="color: var(--while)">Thêm vào tin</p>
+            </div>
+  
+            <div class="info-body-btn" style="background: #3a3b3c;">
+              <div class="pen-icon">
+                <img src="assets/image/svg/pen.svg" alt="">
+              </div>
+              <p style="color: var(--while)">Chỉnh sửa trang cá nhân</p>
+            </div>
+          </div>
+          <div class="show">
+            <!-- <img src="" alt=""> -->
+          </div>
+        </div>
+
+      </div>
+
+      <div class="navbar">
+        <div class="navbar-tab">
+          <nav mat-tab-nav-bar>
+            <a *ngFor="let item of navbars" mat-tab-link [active]="activeLinkTab === item.active">
+              {{item.title}}
+            </a>
+          </nav>
+        </div>
+        <div class="navbar-button">...</div>
+      </div>
+    </div>
+  </div>
+  <div class="profile_body">
+    <div class="profile_body-head">
+      <div class="profile_body-left">
+        <app-introduce></app-introduce>
+        <app-friends></app-friends>
+      </div>
+      <div class="profile_body-right"></div>
     </div>
   </div>
 </div>
