@@ -38,8 +38,9 @@ export class LoginComponent {
     this.loginService.authLogin(credentials).subscribe(
       (response) => {
         localStorage.setItem('token', response.token);
-        localStorage.setItem('userId', response.userId);
-        localStorage.setItem('name', response.name);
+        localStorage.setItem('userId', response.data.id);
+        localStorage.setItem('name', response.data.name);
+        localStorage.setItem('avatar', response.data.avatar);
         this.router.navigate(['home']);
       },
     )

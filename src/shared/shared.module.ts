@@ -45,6 +45,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatMenuModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatSnackBarModule,
   ],
+  providers: [SnackBarComponent],
 })
 export class SharedModule { }

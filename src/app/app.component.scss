@@ -6,7 +6,8 @@
 .content-wrapper{
   width: 100%;
   height: auto;
-  // display: flex;
+  display: flex;
+  justify-content: center;
 }
 
 app-sidebar {
@@ -19,4 +20,5 @@ app-sidebar {
 app-header{
   position: fixed;
   width: 100%;
+  z-index: 10;
 }

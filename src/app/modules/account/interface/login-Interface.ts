@@ -4,16 +4,22 @@ export interface LoginInterface {
 }
 
 export interface LoginResult {
-  token: string;
-  userId: string;
+  id: string;
   name: string;
+  email: string
+  password: string;
+  avatar: string
+  cover_photo: string;
+  bio: string
+  address: string;
+  phone: number
+  website: string;
+  workplace: string
+  education: string;
+  birthdate: string;
 }
 
 export interface LoginRespon {
-  error: string,
+  token: string;
   data: LoginResult,
-  success: boolean,
-  targetUrl: string,
-  unAuthorizedRequest: boolean,
-  __abp: boolean,
 }

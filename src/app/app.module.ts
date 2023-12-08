@@ -13,8 +13,6 @@ import { ProfileComponent } from './modules/profile/profile.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToKenAuth } from './core/interceptors/sample.interceptor';
 import { DialogConfirmComponent } from './modules/dialog-confirm/dialog-confirm.component';
-import { SnackBarComponent } from 'src/shared/snack-bar/snack-bar.component';
-import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { IntroduceComponent } from './modules/profile/introduce/introduce.component';
 import { FriendsComponent } from './modules/profile/friends/friends.component';
 
@@ -43,10 +41,6 @@ import { FriendsComponent } from './modules/profile/friends/friends.component';
       useClass: ToKenAuth,
       multi: true,
     },
-    // {
-    // provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
-    // useValue: {}
-    // }
   ],
   bootstrap: [AppComponent]
 })
