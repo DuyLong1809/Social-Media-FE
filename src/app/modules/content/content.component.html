@@ -7,11 +7,14 @@
             <img
               width="100%"
               height="100%"
-              src="../../../assets/image/8a818994-8aa5-4c5b-849f-5bec1804be4f.png"
+              [src]="configUrl + '/' + avatarUser"
               alt=""
             />
           </div>
-          <div class="add-post" (click)="OpenDialogCreateEditPost(false, null)">
+          <div
+            class="add-post"
+            (click)="OpenDialogCreateEditPost(false, datas)"
+          >
             <span>Bạn đang nghĩ gì thế?</span>
           </div>
         </div>
@@ -25,7 +28,7 @@
               <img
                 width="100%"
                 height="100%"
-                src="../../../assets/image/8a818994-8aa5-4c5b-849f-5bec1804be4f.png"
+                [src]="configUrl + '/' + data.user.avatar"
                 alt=""
               />
             </div>
@@ -37,19 +40,25 @@
           <div *ngIf="isPostOwner(data.user_id)">
             <mat-icon [matMenuTriggerFor]="menu">more_horiz</mat-icon>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="OpenDialogCreateEditPost(true, data)">
-                <mat-icon style="color: #9d9d9d;">edit</mat-icon>
+              <button
+                mat-menu-item
+                (click)="OpenDialogCreateEditPost(true, data)"
+              >
+                <mat-icon style="color: #9d9d9d">edit</mat-icon>
                 Chỉnh sửa bài viết
               </button>
-              <button mat-menu-item (click)="OpenDialogConfirm(data.id, data.user_id)">
-                <mat-icon style="color: #9d9d9d;">delete</mat-icon>
+              <button
+                mat-menu-item
+                (click)="OpenDialogConfirm(data.id, data.user_id)"
+              >
+                <mat-icon style="color: #9d9d9d">delete</mat-icon>
                 Xóa bài viết
               </button>
             </mat-menu>
           </div>
         </div>
         <div class="content-new">
-          <p style="white-space: pre-line;">{{ data.content }}</p>
+          <p style="white-space: pre-line">{{ data.content }}</p>
           <div *ngIf="data.images" class="img-post">
             <img
               width="100%"
@@ -71,9 +80,9 @@
             </div>
           </div>
           <div class="articles-posts-down">
-            <div class="article">
-              <mat-icon>favorite</mat-icon>
-              <span>Thích</span>
+            <div class="article" (click)="toggleLike(data.id)">
+              <mat-icon [style.color]="getLikeColor(data)"> favorite </mat-icon>
+              <span [style.color]="getLikeColor(data)"> Thích </span>
             </div>
             <div class="article">
               <mat-icon>comment</mat-icon>

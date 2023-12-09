@@ -25,6 +25,7 @@ export interface IgetAllPost {
   view_count_news: number;
   user: IUser;
   images: IgetAllPostImage[];
+  likes: ILikes[];
   created_at: string;
   updated_at: string;
 }
@@ -40,6 +41,20 @@ export interface IgetAllPostImage {
 
 export interface IgetAllPostRespon {
   data: IgetAllPost[]
+}
+
+
+export interface ILikes {
+  id: number;
+  user_id: number;
+  post_id: number;
+  isLiked: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ILikesRespon {
+  isLiked: boolean;
 }
 
 

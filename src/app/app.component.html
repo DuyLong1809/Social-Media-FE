@@ -1,8 +1,8 @@
 <div class="wrapper">
-  <app-header *ngIf="!hideHeader"></app-header>
+  <app-header [avatarUser]="avatarUser" *ngIf="!hideHeader"></app-header>
   <div class="content-wrapper">
     <ng-container *ngIf="!hideSidebar">
-      <app-sidebar></app-sidebar>
+      <app-sidebar [nameUser]="nameUser" [avatarUser]="avatarUser"></app-sidebar>
     </ng-container>
     <router-outlet></router-outlet>
   </div>

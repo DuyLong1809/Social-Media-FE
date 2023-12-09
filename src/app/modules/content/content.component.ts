@@ -17,18 +17,28 @@ export class ContentComponent {
 
   datas: IgetAllPost[] = [];
   currentUserId!: number;
+  avatarUser!: string | null;
+  isLiked: boolean = false;
+  nameUser!: string | null;
   configUrl = environment.ApiUrl;
 
   constructor(
     public dialog: MatDialog,
     private handleService: HandleService,
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     const userIdFromStorage = localStorage.getItem('userId');
     if (userIdFromStorage !== null) {
       const parsedUserId = parseInt(userIdFromStorage, 10);
       this.currentUserId = parsedUserId;
+
+      this.handleService.getProfileUser(this.currentUserId).subscribe(
+        (result) => {
+          this.avatarUser = result.data.avatar
+          this.nameUser = result.data.name
+        })
     }
     this.getAllPost();
   }
@@ -56,7 +66,9 @@ export class ContentComponent {
       disableClose: true,
       data: {
         editMode: editMode,
-        postData: editMode ? postData : null
+        avatarUser: this.avatarUser,
+        nameUser: this.nameUser,
+        postData: editMode ? postData : postData
       }
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -66,7 +78,7 @@ export class ContentComponent {
     });
   }
 
-  OpenDialogConfirm(postId: number, userId: number){
+  OpenDialogConfirm(postId: number, userId: number) {
     const dialogRef = this.dialog.open(DialogConfirmComponent, {
       disableClose: true,
       data: {
@@ -79,5 +91,25 @@ export class ContentComponent {
         this.getAllPost();
       }
     });
+  }
+
+  toggleLike(postId: number) {
+    const params = {
+      user_id: this.currentUserId
+    }
+    this.handleService.likePost(postId, params).subscribe((res) => {
+      const postData = this.datas.find(post => post.id === postId);
+      if (postData) {
+        postData.likes[0].isLiked = !postData.likes[0].isLiked;
+        console.log(postData.likes[0].isLiked);
+      }
+    })
+  }
+
+  getLikeColor(data: any): string {
+    if (!data.likes || data.likes.length === 0) {
+      return '#9d9d9d';
+    }
+    return data.likes[0].isLiked ? 'red' : '#9d9d9d';
   }
 }

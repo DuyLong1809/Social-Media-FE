@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment.prod';
+import { HandleService } from '../../handle/handle.service';
 
 @Component({
   selector: 'app-header',
@@ -7,10 +9,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+  
+  @Input() avatarUser!: string | null
+  
+  userId!: number;
+  configUrl = environment.ApiUrl;
 
-  constructor(private router: Router){}
+  constructor(
+    private router: Router,
+  ) { }
 
-  LogOut(){
+  ngOnInit() {
+  }
+
+  LogOut() {
     localStorage.clear();
     this.router.navigate(['account/login'])
   }

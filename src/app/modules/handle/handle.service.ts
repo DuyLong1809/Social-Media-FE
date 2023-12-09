@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
-import { IUserRespon, IgetAllPostRespon } from './interface';
+import { ILikesRespon, IUserRespon, IgetAllPostRespon } from './interface';
 
 @Injectable({
   providedIn: 'root'
@@ -35,5 +35,10 @@ export class HandleService {
   public deletePost(postId: number, data:{}) {
     const apiUrl = `${environment.ApiUrl}/api/delete-post/${postId}`;
     return this.http.post(apiUrl, data);
+  }
+
+  public likePost(postId: number, data:{}) {
+    const apiUrl = `${environment.ApiUrl}/api/like-post/postId=${postId}`;
+    return this.http.post<ILikesRespon>(apiUrl, data);
   }
 }

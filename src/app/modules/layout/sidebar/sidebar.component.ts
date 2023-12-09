@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,14 +9,16 @@ import { Router } from '@angular/router';
 })
 export class SidebarComponent {
 
-  nameUser!: string | null;
+  @Input() avatarUser!: string | null
+  @Input() nameUser!: string | null
+
+  configUrl = environment.ApiUrl;
 
   constructor(
     private router: Router,
     ) { }
 
   ngOnInit() {
-   this.nameUser = localStorage.getItem('name');
   }
 
   openProfile() {

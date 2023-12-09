@@ -14,6 +14,7 @@ export class DialogCreatePostComponent {
 
   postForm!: FormGroup;
   nameUser!: string | null;
+  avatarUser!: string | null;
   selectedFileImg!: File;
   userId!: number;
   postData: any;
@@ -28,6 +29,8 @@ export class DialogCreatePostComponent {
     private snackBar: SnackBarComponent,
     private fb: FormBuilder,
   ) {
+    this.avatarUser = data.avatarUser,
+    this.nameUser = data.nameUser,
     this.postData = data.postData,
       this.editMode = data.editMode,
       this.postForm = this.fb.group({
@@ -36,7 +39,6 @@ export class DialogCreatePostComponent {
   }
 
   ngOnInit() {
-    this.nameUser = localStorage.getItem('name');
     const userIdFromStorage = localStorage.getItem('userId');
     if (userIdFromStorage !== null) {
       const parsedUserId = parseInt(userIdFromStorage, 10);
@@ -84,6 +86,10 @@ export class DialogCreatePostComponent {
     this.handleService.updatePost(formData, this.postData.id).subscribe(
       (res) => {
         this.dialogRef.close(true);
+        this.snackBar.openSnackBar('Sửa bài viết thành công', 'successBar')
+      },
+      (error) => {
+        this.snackBar.openSnackBar('Sửa bài viết thất bại', 'errorBar')
       })
   }
 

@@ -18,7 +18,7 @@ export class SnackBarComponent {
     config.duration = 3000;
     config.panelClass = [background];
     config.verticalPosition = 'bottom';
-    config.horizontalPosition = 'right';
+    config.horizontalPosition = 'end';
     this._snackBar.open(message, undefined, config);
   }
 }
