@@ -16,7 +16,7 @@ import { DialogConfirmComponent } from '../dialog-confirm/dialog-confirm.compone
 export class ContentComponent {
 
   datas: IgetAllPost[] = [];
-  currentUserId!: number;
+  userId!: number | null;
   avatarUser!: string | null;
   isLiked: boolean = false;
   nameUser!: string | null;
@@ -30,11 +30,9 @@ export class ContentComponent {
 
   ngOnInit() {
     const userIdFromStorage = localStorage.getItem('userId');
-    if (userIdFromStorage !== null) {
-      const parsedUserId = parseInt(userIdFromStorage, 10);
-      this.currentUserId = parsedUserId;
-
-      this.handleService.getProfileUser(this.currentUserId).subscribe(
+    this.userId = userIdFromStorage ? parseInt(userIdFromStorage, 10) : null;
+    if (this.userId !== null) {
+      this.handleService.getNameAvatarUser(this.userId).subscribe(
         (result) => {
           this.avatarUser = result.data.avatar
           this.nameUser = result.data.name
@@ -44,7 +42,7 @@ export class ContentComponent {
   }
 
   isPostOwner(userId: number): boolean {
-    return this.currentUserId === userId;
+    return this.userId === userId;
   }
 
   timeAgo(dateString: string | null) {
@@ -58,6 +56,12 @@ export class ContentComponent {
   getAllPost() {
     this.handleService.getAllPost().subscribe((res) => {
       this.datas = res.data;
+
+      this.datas.forEach(post => {
+        if (post.likes && post.likes.length > 0) {
+          post.likes.some(like => like.user_id === this.userId && like.isLiked);
+        }
+      });
     })
   }
 
@@ -95,13 +99,12 @@ export class ContentComponent {
 
   toggleLike(postId: number) {
     const params = {
-      user_id: this.currentUserId
+      user_id: this.userId
     }
     this.handleService.likePost(postId, params).subscribe((res) => {
       const postData = this.datas.find(post => post.id === postId);
       if (postData) {
         postData.likes[0].isLiked = !postData.likes[0].isLiked;
-        console.log(postData.likes[0].isLiked);
       }
     })
   }

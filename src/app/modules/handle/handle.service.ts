@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
-import { ILikesRespon, IUserRespon, IgetAllPostRespon } from './interface';
+import { ILikesRespon, INameAvatarUserRespon, IUserRespon, IgetAllPostRespon } from './interface';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,11 @@ export class HandleService {
   public getProfileUser(userId: number) {
     const apiUrl = `${environment.ApiUrl}/api/get-user/userId=${userId}`;
     return this.http.get<IUserRespon>(apiUrl);
+  }
+
+  public getNameAvatarUser(userId: number) {
+    const apiUrl = `${environment.ApiUrl}/api/get-name-avatar-user/userId=${userId}`;
+    return this.http.get<INameAvatarUserRespon>(apiUrl);
   }
   
   public getAllPost(){

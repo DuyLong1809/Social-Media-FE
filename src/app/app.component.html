@@ -1,12 +1,12 @@
 <div class="wrapper">
   <div class="wrapper-header">
-    <app-header [avatarUser]="avatarUser" *ngIf="!hideHeader"></app-header>
+    <app-header *ngIf="!hideHeader"></app-header>
   </div>
 
   <div class="wrapper-content">
     <ng-container *ngIf="!hideSidebar">
       <div class="content-sidebar">
-        <app-sidebar [nameUser]="nameUser" [avatarUser]="avatarUser"></app-sidebar>
+        <app-sidebar></app-sidebar>
       </div>
     </ng-container>
 

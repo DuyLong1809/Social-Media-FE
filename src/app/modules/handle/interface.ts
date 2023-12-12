@@ -18,6 +18,15 @@ export interface IUserRespon {
   data: IUser
 }
 
+export interface INameAvatarUser {
+  name: string;
+  avatar: string
+}
+
+export interface INameAvatarUserRespon {
+  data: INameAvatarUser
+}
+
 export interface IgetAllPost {
   id: number;
   user_id: number;

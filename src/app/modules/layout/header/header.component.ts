@@ -9,17 +9,26 @@ import { HandleService } from '../../handle/handle.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  
-  @Input() avatarUser!: string | null
-  
-  userId!: number;
+
+  userId!: number | null;
+  avatarUser!: string | null
+
   configUrl = environment.ApiUrl;
 
   constructor(
     private router: Router,
+    private handleService: HandleService,
   ) { }
 
   ngOnInit() {
+    const userIdFromStorage = localStorage.getItem('userId');
+    this.userId = userIdFromStorage ? parseInt(userIdFromStorage, 10) : null;
+
+    this.handleService.getNameAvatarUser(this.userId!).subscribe(
+      (result) => {
+        this.avatarUser = result.data.avatar
+      },
+    );
   }
 
   LogOut() {

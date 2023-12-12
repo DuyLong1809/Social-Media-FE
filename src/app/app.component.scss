@@ -1,5 +1,5 @@
 .wrapper{
-  background-color: #18191a;
+  background-color: #18181af7;
   min-height: 1000px;
 }
 
@@ -39,7 +39,7 @@
 }
 .friends-head-title{
   font-size: 17px;
-  color: var(--while);
+  color: #d2d2d2;
 }
 
 .item{
@@ -68,5 +68,17 @@
 
 .content-friends-body{
   max-height: 700px;
-  overflow-y: scroll;
+  overflow-y: auto;
+}
+
+.content-friends-body::-webkit-scrollbar {
+  width: 10px;
+}
+
+.content-friends-body::-webkit-scrollbar-thumb {
+  background-color: #333333;
+}
+
+.content-friends-body::-webkit-scrollbar-track {
+  background-color: #272727;
 }
