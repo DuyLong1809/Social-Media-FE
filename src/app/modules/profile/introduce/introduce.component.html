@@ -3,7 +3,7 @@
         <h2>Giới thiệu</h2>
         <ng-container *ngIf="isStory; then showStory else hideStory"></ng-container>
         <ng-template #hideStory>
-            <div class="introduce-btn">
+            <div class="introduce-btn" *ngIf="userIdFromStorage === userId">
                 <div class="main-btn pointer" (click)="handleStory()">
                     <p>Thêm tiểu sử</p>
                 </div>
@@ -12,31 +12,27 @@
         <ng-template #showStory>
             <div class="add-tieu-su">
                 <div class="add-tieu-su-input">
-                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                    <textarea name="" id="" cols="30" rows="10">{{ bio }}</textarea>
                 </div>
                 <div class="count-text">còn 100 ký tự</div>
                 <div class="tieu-su-btn">
                     <button class="btn-sub" (click)="handleStory()">Hủy</button>
-                    <button class="btn-sub btn_disabled">Lưu</button>
+                    <button class="btn-sub">Lưu</button>
                 </div>
             </div>
         </ng-template>
 
-        <div class="introduce-btn">
-            <div class="participation-time">
-                <!-- icon -->
-                <p>Tham gia vào Tháng 4 năm 2016</p>
-            </div>
+        <div class="introduce-btn" *ngIf="userIdFromStorage === userId">
             <div class="main-btn pointer">
                 <p>Chỉnh sửa chi tiết</p>
             </div>
         </div>
-        <div class="introduce-btn">
+        <div class="introduce-btn" *ngIf="userIdFromStorage === userId">
             <div class="main-btn pointer">
                 <p>Thêm sở thích</p>
             </div>
         </div>
-        <div class="introduce-btn">
+        <div class="introduce-btn" *ngIf="userIdFromStorage === userId">
             <div class="main-btn pointer">
                 <p>Thêm nội dung đáng chú ý</p>
             </div>

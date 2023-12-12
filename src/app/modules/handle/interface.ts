@@ -12,6 +12,7 @@ export interface IUser {
   workplace: string
   education: string;
   birthdate: string;
+  posts: IgetAllPost[];
 }
 
 export interface IUserRespon {

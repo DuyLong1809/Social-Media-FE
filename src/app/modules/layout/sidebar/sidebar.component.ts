@@ -34,6 +34,6 @@ export class SidebarComponent {
   }
 
   openProfile() {
-    return this.router.navigate(['profile']);
+    return this.router.navigate([`profile/${this.userId}`]);
   }
 }

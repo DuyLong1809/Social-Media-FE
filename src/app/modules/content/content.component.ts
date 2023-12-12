@@ -7,6 +7,7 @@ import { formatDistanceToNow } from 'date-fns';
 import vi from 'date-fns/locale/vi';
 import { environment } from 'src/environments/environment.prod';
 import { DialogConfirmComponent } from '../dialog-confirm/dialog-confirm.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-content',
@@ -25,6 +26,7 @@ export class ContentComponent {
   constructor(
     public dialog: MatDialog,
     private handleService: HandleService,
+    private router: Router,
   ) {
   }
 
@@ -114,5 +116,9 @@ export class ContentComponent {
       return '#9d9d9d';
     }
     return data.likes[0].isLiked ? 'red' : '#9d9d9d';
+  }
+
+  openProfile(id: number) {
+    return this.router.navigate([`profile/${id}`]);
   }
 }
