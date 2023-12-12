@@ -1,12 +1,27 @@
 <div class="introduce">
     <div class="introduce_content">
         <h2>Giới thiệu</h2>
-
-        <div class="introduce-btn">
-            <div class="main-btn pointer">
-                <p>Thêm tiểu sử</p>
+        <ng-container *ngIf="isStory; then showStory else hideStory"></ng-container>
+        <ng-template #hideStory>
+            <div class="introduce-btn">
+                <div class="main-btn pointer" (click)="handleStory()">
+                    <p>Thêm tiểu sử</p>
+                </div>
             </div>
-        </div>
+        </ng-template>
+        <ng-template #showStory>
+            <div class="add-tieu-su">
+                <div class="add-tieu-su-input">
+                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                </div>
+                <div class="count-text">còn 100 ký tự</div>
+                <div class="tieu-su-btn">
+                    <button class="btn-sub" (click)="handleStory()">Hủy</button>
+                    <button class="btn-sub btn_disabled">Lưu</button>
+                </div>
+            </div>
+        </ng-template>
+
         <div class="introduce-btn">
             <div class="participation-time">
                 <!-- icon -->

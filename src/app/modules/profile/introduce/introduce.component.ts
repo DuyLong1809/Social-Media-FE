@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./introduce.component.scss']
 })
 export class IntroduceComponent {
+  public isStory: boolean = false;
 
+  handleStory(){
+    this.isStory = !this.isStory;
+  }
 }
