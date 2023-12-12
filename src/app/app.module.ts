@@ -15,6 +15,7 @@ import { ToKenAuth } from './core/interceptors/sample.interceptor';
 import { DialogConfirmComponent } from './modules/dialog-confirm/dialog-confirm.component';
 import { IntroduceComponent } from './modules/profile/introduce/introduce.component';
 import { FriendsComponent } from './modules/profile/friends/friends.component';
+import { CommentComponent } from './modules/content/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { FriendsComponent } from './modules/profile/friends/friends.component';
     ProfileComponent,
     DialogConfirmComponent,
     IntroduceComponent,
-    FriendsComponent
+    FriendsComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,

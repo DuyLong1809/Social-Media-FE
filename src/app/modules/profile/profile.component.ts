@@ -8,6 +8,7 @@ import vi from 'date-fns/locale/vi';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogCreatePostComponent } from '../dialog-create-post/dialog-create-post.component';
 import { ActivatedRoute } from '@angular/router';
+import { CommentComponent } from '../content/comment/comment.component';
 
 @Component({
   selector: 'app-profile',
@@ -27,9 +28,7 @@ export class ProfileComponent implements OnInit {
     public dialog: MatDialog,
     private handleService: HandleService,
     private route: ActivatedRoute,
-  ) {
-
-  }
+  ) {}
 
   ngOnInit(): void {
     this.userId = Number(this.route.snapshot.paramMap.get('id'))
@@ -108,5 +107,16 @@ export class ProfileComponent implements OnInit {
     }
     const date = new Date(dateString);
     return formatDistanceToNow(date, { addSuffix: true, locale: vi });
+  }
+
+  openDialogComment(){
+    const dialogRef = this.dialog.open(CommentComponent, {
+      // disableClose: true,
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.getProfileById();
+      }
+    });
   }
 }

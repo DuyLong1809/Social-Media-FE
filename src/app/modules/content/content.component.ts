@@ -8,6 +8,7 @@ import vi from 'date-fns/locale/vi';
 import { environment } from 'src/environments/environment.prod';
 import { DialogConfirmComponent } from '../dialog-confirm/dialog-confirm.component';
 import { Router } from '@angular/router';
+import { CommentComponent } from './comment/comment.component';
 
 @Component({
   selector: 'app-content',
@@ -120,5 +121,21 @@ export class ContentComponent {
 
   openProfile(id: number) {
     return this.router.navigate([`profile/${id}`]);
+  }
+
+  openDialogComment(nameUser: string, avatarUser: string, imgPost: string){
+    const dialogRef = this.dialog.open(CommentComponent, {
+      disableClose: true,
+      data:{
+        avatarUser: avatarUser,
+        nameUser: nameUser,
+        imgPost: imgPost,
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.getAllPost();
+      }
+    });
   }
 }

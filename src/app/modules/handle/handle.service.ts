@@ -21,6 +21,11 @@ export class HandleService {
     const apiUrl = `${environment.ApiUrl}/api/get-name-avatar-user/userId=${userId}`;
     return this.http.get<INameAvatarUserRespon>(apiUrl);
   }
+
+  public updateProfileUser(data: any, id:number) {
+    const apiUrl = `${environment.ApiUrl}/update-profile/userId=${id}`;
+    return this.http.post<IgetAllPostRespon>(apiUrl, data);
+  }
   
   public getAllPost(){
     const apiUrl = `${environment.ApiUrl}/api/get-post/all`;

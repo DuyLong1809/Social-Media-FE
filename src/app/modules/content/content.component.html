@@ -84,7 +84,7 @@
               <mat-icon [style.color]="getLikeColor(data)"> favorite </mat-icon>
               <span [style.color]="getLikeColor(data)"> Thích </span>
             </div>
-            <div class="article">
+            <div class="article" (click)="openDialogComment(data.user.name, data.user.avatar, data.images[0].image_url)">
               <mat-icon>comment</mat-icon>
               <span>Bình luận</span>
             </div>

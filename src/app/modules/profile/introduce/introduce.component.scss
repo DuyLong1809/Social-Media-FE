@@ -1,91 +1,94 @@
-h2, p{
-    margin-bottom: unset !important;
+h2,
+p {
+  margin-bottom: unset !important;
 }
-img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-.introduce{
-    background: #242526;
-    padding: 12px;
-    border-radius: 6px;
-    margin-bottom: 25px;
-}
-.introduce_content{
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-}
-.introduce_content h2{
-    color: #e3e5ea;
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.main-btn{
-    height: 36px;
-    background: #3a3b3c;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 6px;
+.introduce {
+  background: #242526;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 25px;
+}
+.introduce_content {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.introduce_content h2 {
+  color: #e3e5ea;
 }
 
-.main-btn p{
-    font-size: 15px;
-    color: #dddfe4;
+.main-btn {
+  height: 36px;
+  background: #3a3b3c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
 }
 
-.participation-time{
-    margin-bottom: 8px;
-    color: var(--while);
+.main-btn p {
+  font-size: 15px;
+  color: #dddfe4;
 }
 
-.tieu-su-btn{
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 4px;
+.participation-time {
+  margin-bottom: 8px;
+  color: var(--while);
 }
 
-.btn-sub{
-    width: 51px;height: 36px;
-    border-radius: 8px;
-    text-align: center;
-    line-height: 36px;
-    outline: none;
-    border: none;
-    cursor: pointer;
-    background: #3a3b3c;
-    color: #FFF;
-    font-weight: 600;
-}
-.add-tieu-su{
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-.count-text{
-    color: #FFF;
-    font-size: 13px;text-align: right;
+.tieu-su-btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
 }
 
-.add-tieu-su-input textarea{
-    width: 100%;
-    height: 76px;
-    padding: 4px;
-    color: var(--while);
-    text-align: center;
-    border-radius: 8px;
-    background: #3a3b3c;
+.btn-sub {
+  width: 51px;
+  height: 36px;
+  border-radius: 8px;
+  text-align: center;
+  line-height: 36px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background: #3a3b3c;
+  color: #fff;
+  font-weight: 600;
+}
+.add-tieu-su {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.count-text {
+  color: #fff;
+  font-size: 13px;
+  text-align: right;
 }
 
-.tieu-su-btn .btn_active{
-    background: var(--main-color);
-    color: #FFF;
+.add-tieu-su-input textarea {
+  width: 100%;
+  height: 76px;
+  padding: 4px;
+  color: var(--while);
+  text-align: center;
+  border-radius: 8px;
+  background: #3a3b3c;
 }
 
-.tieu-su-btn .btn_disabled{
-    background: #505151;
-    color: #787979;
+.tieu-su-btn .btn_active {
+  background: var(--main-color);
+  color: #fff;
+}
+
+.tieu-su-btn .btn_disabled {
+  background: #505151;
+  color: #787979;
 }

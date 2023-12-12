@@ -159,7 +159,7 @@
                       </mat-icon>
                       <span [style.color]="getLikeColor(data)"> Thích </span>
                     </div>
-                    <div class="article">
+                    <div class="article" (click)="openDialogComment()">
                       <mat-icon>comment</mat-icon>
                       <span>Bình luận</span>
                     </div>

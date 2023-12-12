@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="wrapper">
+    <div class="cmt-left">
+      <div class="cmt-img">
+        <img
+          height="100%"
+          width="100%"
+          [src]="configUrl + '/images/' + imgPost"
+          alt=""
+        />
+      </div>
+    </div>
+    <div class="cmt-right">
+      <div class="cmt-header">
+        <div class="header-post-user">
+          <div class="av-user">
+            <img
+              width="100%"
+              height="100%"
+              [src]="configUrl + '/' + avatarUser"
+              alt=""
+            />
+          </div>
+          <div class="title">
+            <span>{{ nameUser }}</span>
+          </div>
+        </div>
+        <mat-icon style="cursor: pointer" mat-dialog-close>close</mat-icon>
+      </div>
+      <div class="cmt-content">
+        <h1>Chưa có bình luận nào</h1>
+      </div>
+      <form action="">
+        <div class="cmt-footer">
+          <textarea placeholder="Thêm bình luận..."></textarea>
+          <div class="btn">
+            <mat-icon style="cursor: pointer">send</mat-icon>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
