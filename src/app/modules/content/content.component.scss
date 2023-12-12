@@ -1,7 +1,12 @@
 .container {
-  width: 45vw;
-  padding: 20px;
-  margin-top: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}
+
+.content{
+  width: 45%;
 }
 
 .create-post {

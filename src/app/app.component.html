@@ -1,9 +1,37 @@
 <div class="wrapper">
-  <app-header [avatarUser]="avatarUser" *ngIf="!hideHeader"></app-header>
-  <div class="content-wrapper">
-    <ng-container *ngIf="!hideSidebar">
-      <app-sidebar [nameUser]="nameUser" [avatarUser]="avatarUser"></app-sidebar>
-    </ng-container>
-    <router-outlet></router-outlet>
+  <div class="wrapper-header">
+    <app-header [avatarUser]="avatarUser" *ngIf="!hideHeader"></app-header>
   </div>
+
+  <div class="wrapper-content">
+    <ng-container *ngIf="!hideSidebar">
+      <div class="content-sidebar">
+        <app-sidebar [nameUser]="nameUser" [avatarUser]="avatarUser"></app-sidebar>
+      </div>
+    </ng-container>
+
+    <div class="content-body">
+      <router-outlet></router-outlet>
+    </div>
+
+    <ng-container *ngIf="!hideSidebar">
+      <div class="content-friends">
+        <div class="content-friends-head">
+          <div class="friends-head-title">Người liên hệ</div>
+          <div class="friends-head-icon"></div>
+        </div>
+  
+        <div class="content-friends-body">
+          <div class="item" *ngFor="let friend of friends">
+            <div class="item-image">
+              <img src="https://img2.thuthuatphanmem.vn/uploads/2019/01/04/anh-gai-xinh-dep_025100741.jpg" alt="">
+            </div>
+            <div class="item-name">Nguyễn Quang Duy</div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+
 </div>

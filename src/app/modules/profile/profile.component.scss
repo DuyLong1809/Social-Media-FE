@@ -6,11 +6,6 @@ img{
 p{
   margin-bottom: unset !important;
 }
-.profile{
-  // width: 100%;
-  padding-top: 60px;
-}
-
 .profile_content{
   background: #242526;
 }
@@ -35,7 +30,7 @@ p{
   align-items: center;
   border-bottom: 1px solid #CCC;
   padding-bottom: 15px;
-  margin: -36px 32px 15px;
+  margin: -36px 32px 0;
 }
 
 .info_avatar{
@@ -164,7 +159,6 @@ p{
 
 .profile_body{
   background: #18191a;
-  padding: 30px 0;
 }
 
 .profile_body-head{
@@ -181,4 +175,14 @@ p{
   width: 57%;
   height: 500px;
   background: red;
+}
+
+::ng-deep .mat-mdc-tab-label-container{
+  padding-left: 180px;
+  margin-bottom: 20px;
+  background: #242526;
+}
+
+::ng-deep .profile_body .mat-mdc-tab .mdc-tab__text-label{
+  color: #FFF;
 }

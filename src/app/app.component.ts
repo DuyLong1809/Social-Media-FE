@@ -15,6 +15,7 @@ export class AppComponent {
   nameUser!: string | null
   hideSidebar: boolean = false;
   hideHeader: boolean = false;
+  public friends = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
 
   constructor(private router: Router, private handleService: HandleService) {
     this.router.events
@@ -25,21 +26,23 @@ export class AppComponent {
       });
   }
 
-  ngOnInit() {
-    if (localStorage.getItem('token') === null) {
-      this.router.navigate(['account/login']);
-    }
+  // ngOnInit() {
+  //   if (localStorage.getItem('token') === null) {
+  //     this.router.navigate(['account/login']);
+  //   }
 
-    const userIdFromStorage = localStorage.getItem('userId');
-    if (userIdFromStorage !== null) {
-      const parsedUserId = parseInt(userIdFromStorage, 10);
-      this.userId = parsedUserId;
-    }
-    this.handleService.getProfileUser(this.userId).subscribe(
-      (result) => {
-        this.avatarUser = result.data.avatar
-        this.nameUser = result.data.name
-      })
-  }
+  //   const userIdFromStorage = localStorage.getItem('userId');
+  //   if (userIdFromStorage !== null) {
+  //     const parsedUserId = parseInt(userIdFromStorage, 10);
+  //     this.userId = parsedUserId;
+  //   }
+  //   this.handleService.getProfileUser(this.userId).subscribe(
+  //     (result) => {
+  //       this.avatarUser = result.data.avatar
+  //       this.nameUser = result.data.name
+  //     })
+  // }
+
+  
 
 }
