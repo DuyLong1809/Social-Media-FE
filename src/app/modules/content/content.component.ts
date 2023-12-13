@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment.prod';
 import { DialogConfirmComponent } from '../dialog-confirm/dialog-confirm.component';
 import { Router } from '@angular/router';
 import { CommentComponent } from './comment/comment.component';
+import { count } from 'rxjs';
 
 @Component({
   selector: 'app-content',
@@ -20,9 +21,9 @@ export class ContentComponent {
   datas: IgetAllPost[] = [];
   userId!: number | null;
   avatarUser!: string | null;
-  isLiked: boolean = false;
   nameUser!: string | null;
   configUrl = environment.ApiUrl;
+  countLikes!: number;
 
   constructor(
     public dialog: MatDialog,
@@ -62,7 +63,8 @@ export class ContentComponent {
 
       this.datas.forEach(post => {
         if (post.likes && post.likes.length > 0) {
-          post.likes.some(like => like.user_id === this.userId && like.isLiked);
+          const userLiked = post.likes.some(like => like.user_id === this.userId && like.isLiked);
+          post.likes[0].isLiked = userLiked;
         }
       });
     })
@@ -106,27 +108,36 @@ export class ContentComponent {
     }
     this.handleService.likePost(postId, params).subscribe((res) => {
       const postData = this.datas.find(post => post.id === postId);
-      if (postData) {
-        postData.likes[0].isLiked = !postData.likes[0].isLiked;
-      }
+      if (postData && postData.likes && postData.likes.length > 0) {
+        postData.likes[0].isLiked = res.data.like;
+      } else {
+        postData!.likes = [{
+          id: 0,
+          user_id: 0,
+          post_id: 0,
+          created_at: '',
+          updated_at: '',
+          isLiked: res.data.like,
+        }];
+      } 
     })
   }
 
-  getLikeColor(data: any): string {
+  getLikeColor(data: any) {
     if (!data.likes || data.likes.length === 0) {
       return '#9d9d9d';
     }
-    return data.likes[0].isLiked ? 'red' : '#9d9d9d';
+    return data.likes[0].isLiked ? '#f02849' : '#9d9d9d';
   }
 
   openProfile(id: number) {
     return this.router.navigate([`profile/${id}`]);
   }
 
-  openDialogComment(nameUser: string, avatarUser: string, imgPost: string){
+  openDialogComment(nameUser: string, avatarUser: string, imgPost: string) {
     const dialogRef = this.dialog.open(CommentComponent, {
       disableClose: true,
-      data:{
+      data: {
         avatarUser: avatarUser,
         nameUser: nameUser,
         imgPost: imgPost,

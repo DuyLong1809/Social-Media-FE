@@ -42,6 +42,13 @@ export class ProfileComponent implements OnInit {
       (result) => {
         this.datas = result.data;
         this.posts = result.data.posts;
+
+        this.posts.forEach(post => {
+          if (post.likes && post.likes.length > 0) {
+            const userLiked = post.likes.some(like => like.user_id === this.userIdFromStorage && like.isLiked);
+            post.likes[0].isLiked = userLiked;
+          }
+        });
       },
     );
   }
@@ -80,13 +87,18 @@ export class ProfileComponent implements OnInit {
 
   toggleLike(postId: number) {
     const params = {
-      user_id: this.userId
+      user_id: this.userIdFromStorage
     }
     this.handleService.likePost(postId, params).subscribe((res) => {
       const postData = this.posts.find(post => post.id === postId);
-      if (postData) {
-        postData.likes[0].isLiked = !postData.likes[0].isLiked;
-      }
+      if (postData && postData.likes && postData.likes.length > 0) {
+        postData.likes[0].isLiked = res.data.like;
+      } else {
+        postData!.likes = [{
+          ...postData!.likes[0],
+          isLiked: res.data.like,
+        }];
+      } 
     })
   }
 
@@ -94,11 +106,7 @@ export class ProfileComponent implements OnInit {
     if (!data.likes || data.likes.length === 0) {
       return '#9d9d9d';
     }
-    return data.likes[0].isLiked ? 'red' : '#9d9d9d';
-  }
-
-  isPostOwner(userId: number): boolean {
-    return this.userId === userId;
+    return data.likes[0].isLiked ? '#f02849' : '#9d9d9d';
   }
 
   timeAgo(dateString: string | null) {
@@ -111,7 +119,7 @@ export class ProfileComponent implements OnInit {
 
   openDialogComment(){
     const dialogRef = this.dialog.open(CommentComponent, {
-      // disableClose: true,
+      disableClose: true,
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {

@@ -63,8 +63,5 @@ export interface ILikes {
   updated_at: string;
 }
 
-export interface ILikesRespon {
-  isLiked: boolean;
-}
 
 
