@@ -15,6 +15,9 @@ import { ToKenAuth } from './core/interceptors/sample.interceptor';
 import { DialogConfirmComponent } from './modules/dialog-confirm/dialog-confirm.component';
 import { IntroduceComponent } from './modules/profile/introduce/introduce.component';
 import { FriendsComponent } from './modules/profile/friends/friends.component';
+import { FormsModule } from '@angular/forms';
+import { ImageComponent } from './modules/profile/image/image.component';
+import { Introduce2Component } from './modules/profile/introduce2/introduce2.component';
 
 @NgModule({
   declarations: [
@@ -26,14 +29,17 @@ import { FriendsComponent } from './modules/profile/friends/friends.component';
     ProfileComponent,
     DialogConfirmComponent,
     IntroduceComponent,
-    FriendsComponent
+    FriendsComponent,
+    ImageComponent,
+    Introduce2Component
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
-    AccountModule
+    AccountModule,
+    FormsModule
   ],
   providers: [
     {

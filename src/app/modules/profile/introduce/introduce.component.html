@@ -5,19 +5,33 @@
         <ng-template #hideStory>
             <div class="introduce-btn">
                 <div class="main-btn pointer" (click)="handleStory()">
-                    <p>Thêm tiểu sử</p>
+                    <p>{{textStory}}</p>
                 </div>
             </div>
         </ng-template>
         <ng-template #showStory>
             <div class="add-tieu-su">
                 <div class="add-tieu-su-input">
-                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                    <textarea 
+                        name="" 
+                        id="" 
+                        cols="30" 
+                        rows="10" 
+                        [(ngModel)]="storyValue"
+                        (input)="onTextareaChange()"
+                    ></textarea>
                 </div>
                 <div class="count-text">còn 100 ký tự</div>
                 <div class="tieu-su-btn">
                     <button class="btn-sub" (click)="handleStory()">Hủy</button>
-                    <button class="btn-sub btn_disabled">Lưu</button>
+                    <button 
+                        class="btn-sub btn_disabled" 
+                        (click)="saveStory()"
+                        [class.btn_disabled]="!isButtonActive" 
+                        [class.btn_active]="isButtonActive"
+                    >
+                        Lưu
+                    </button>
                 </div>
             </div>
         </ng-template>
@@ -27,7 +41,7 @@
                 <!-- icon -->
                 <p>Tham gia vào Tháng 4 năm 2016</p>
             </div>
-            <div class="main-btn pointer">
+            <div class="main-btn pointer" (click)="show()">
                 <p>Chỉnh sửa chi tiết</p>
             </div>
         </div>
