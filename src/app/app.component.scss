@@ -1,20 +1,21 @@
-.wrapper{
-  background-color: #18191a;
-  min-height: 1000px;
+.wrapper {
+  background-color: #18181af7;
+  // min-height: 1000px;
 }
 
-.wrapper-header{
+.wrapper-header {
   position: fixed;
-  top: 0;left: 0;right: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 10;
 }
 
-.wrapper-content{
+.wrapper-content {
   width: 100%;
-  margin-top: 60px;
 }
 
-.content-sidebar{
+.content-sidebar {
   position: fixed;
   top: 0;
   left: 0;
@@ -22,11 +23,11 @@
   margin-top: 90px;
 }
 
-.content-body{
+.content-body {
   width: 100%;
 }
 
-.content-friends{
+.content-friends {
   width: 25%;
   position: fixed;
   top: 0;
@@ -34,39 +35,51 @@
   margin-top: 90px;
 }
 
-.content-friends-head{
+.content-friends-head {
   padding: 8px;
 }
-.friends-head-title{
+.friends-head-title {
   font-size: 17px;
-  color: var(--while);
+  color: #d2d2d2;
 }
 
-.item{
+.item {
   padding: 8px;
   display: flex;
   gap: 8px;
   align-items: center;
 }
 
-.item-image{
+.item-image {
   width: 36px;
   height: 36px;
 }
 
-.item-image img{
+.item-image img {
   width: 100%;
   height: 100%;
   border-radius: 50%;
 }
 
-.item-name{
+.item-name {
   font-size: 15px;
   color: var(--while);
   font-weight: 600;
 }
 
-.content-friends-body{
+.content-friends-body {
   max-height: 700px;
-  overflow-y: scroll;
+  overflow-y: auto;
+}
+
+.content-friends-body::-webkit-scrollbar {
+  width: 10px;
+}
+
+.content-friends-body::-webkit-scrollbar-thumb {
+  background-color: #333333;
+}
+
+.content-friends-body::-webkit-scrollbar-track {
+  background-color: #272727;
 }

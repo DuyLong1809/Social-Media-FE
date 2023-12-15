@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./friends.component.scss']
 })
 export class FriendsComponent {
-  public listFriend = [1,2,3,4,5,6,7,8,9];
+  public listFriend = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 }

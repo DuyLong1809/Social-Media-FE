@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-introduce',
@@ -6,28 +7,34 @@ import { Component } from '@angular/core';
   styleUrls: ['./introduce.component.scss']
 })
 export class IntroduceComponent {
-  public isStory: boolean = false;
-  // public isSuccessStory: boolean = false;
-  public textStory: string = "Thêm tiểu sử";
-  public storyValue: string = '';
+
+  @Input() bio!: string
+  @Input() address!: string;
+  @Input() phone!: number
+  @Input() website!: string;
+  @Input() workplace!: string
+  @Input() education!: string;
+  @Input() birthdate!: string;
+  @Input() userIdFromStorage: number | null | undefined;
+  @Input() userId: number | null | undefined;
+
+  public isBio: boolean = false;
   public isButtonActive: boolean = false;
+  bioForm!: FormGroup;
 
-  handleStory(){
-    this.isStory = !this.isStory;
+  handleBio() {
+    this.isBio = !this.isBio;
   }
 
-  saveStory(){
-    console.log(123);
-    
-    // this.isSuccessStory = true
-    this.isStory = false;
-    this.textStory = "Chỉnh sửa tiểu sử"
+  saveBio() {
+    this.isBio = false;
   }
 
-  onTextareaChange(){
-    this.isButtonActive = this.storyValue.trim() !== "";
+  onTextareaChange() {
+    this.isButtonActive = this.bio.trim() !== "";
   }
-  show(){
-    
+  
+  show() {
+
   }
 }

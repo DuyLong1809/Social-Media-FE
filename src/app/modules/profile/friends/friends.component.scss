@@ -1,58 +1,59 @@
-h2, p{
-    margin-bottom: unset !important;
+h2,
+p {
+  margin-bottom: unset !important;
 }
-img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-.friends{
-    background: #242526;
-    padding: 12px;
-    border-radius: 6px;
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
-
-.friends-content{
-    margin-bottom: 10px;
+.friends {
+  background: #242526;
+  padding: 12px;
+  border-radius: 6px;
 }
 
-.friends-content-head{
-    display: flex;
-    justify-content: space-between;
+.friends-content {
+  margin-bottom: 10px;
 }
 
-.friends-content-head h2{
-    font-size: 20px;
-    color: #e3e5ea;
-    font-weight: 600;
+.friends-content-head {
+  display: flex;
+  justify-content: space-between;
 }
 
-.friends-content-head p{
-    font-size: 17px;
-    color: var(--main-color);
+.friends-content-head h2 {
+  font-size: 20px;
+  color: #e3e5ea;
+  font-weight: 600;
 }
 
-.count-friend{
-    font-size: 17px;
-    color: #e3e5ea;
-    font-weight: 400;
+.friends-content-head p {
+  font-size: 17px;
+  color: var(--main-color);
 }
 
-.friend-image{
-    width: 145px;
-    height: 145px;
-    border-radius: 6px;
-    overflow: hidden;
+.count-friend {
+  font-size: 17px;
+  color: #e3e5ea;
+  font-weight: 400;
 }
 
-.friend-name{
-    font-weight: 400;
-    font-size: 13px;
-    color: #e3e5ea;
+.friend-image {
+  width: 145px;
+  height: 145px;
+  border-radius: 6px;
+  overflow: hidden;
 }
 
-.friends-body{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 13px;
+.friend-name {
+  font-weight: 400;
+  font-size: 13px;
+  color: #e3e5ea;
+}
+
+.friends-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 13px;
 }

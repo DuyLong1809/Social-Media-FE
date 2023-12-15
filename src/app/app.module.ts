@@ -18,6 +18,7 @@ import { FriendsComponent } from './modules/profile/friends/friends.component';
 import { FormsModule } from '@angular/forms';
 import { ImageComponent } from './modules/profile/image/image.component';
 import { Introduce2Component } from './modules/profile/introduce2/introduce2.component';
+import { CommentComponent } from './modules/content/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { Introduce2Component } from './modules/profile/introduce2/introduce2.com
     IntroduceComponent,
     FriendsComponent,
     ImageComponent,
-    Introduce2Component
+    Introduce2Component,
+    CommentComponent
   ],
   imports: [
     BrowserModule,

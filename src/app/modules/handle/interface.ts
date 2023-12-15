@@ -12,10 +12,20 @@ export interface IUser {
   workplace: string
   education: string;
   birthdate: string;
+  posts: IgetAllPost[];
 }
 
 export interface IUserRespon {
   data: IUser
+}
+
+export interface INameAvatarUser {
+  name: string;
+  avatar: string
+}
+
+export interface INameAvatarUserRespon {
+  data: INameAvatarUser
 }
 
 export interface IgetAllPost {
@@ -53,8 +63,5 @@ export interface ILikes {
   updated_at: string;
 }
 
-export interface ILikesRespon {
-  isLiked: boolean;
-}
 
 
