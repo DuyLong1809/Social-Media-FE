@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HandleService } from '../handle/handle.service';
-import { IUser, IgetAllPost } from '../handle/interface';
+import { IUser, IgetAllPost, IgetAllPostImage } from '../handle/interface';
 import { environment } from 'src/environments/environment.prod';
 import { DialogConfirmComponent } from '../dialog-confirm/dialog-confirm.component';
 import { formatDistanceToNow } from 'date-fns';
@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit {
 
   datas!: IUser;
   posts!: IgetAllPost[];
+  images!: IgetAllPostImage[];
   userId: number | null | undefined;
   userIdFromStorage: number | null | undefined;
 
@@ -28,7 +29,7 @@ export class ProfileComponent implements OnInit {
     public dialog: MatDialog,
     private handleService: HandleService,
     private route: ActivatedRoute,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.userId = Number(this.route.snapshot.paramMap.get('id'))
@@ -49,6 +50,12 @@ export class ProfileComponent implements OnInit {
             post.likes[0].isLiked = userLiked;
           }
         });
+
+        result.data.posts.forEach(img => {
+          if (img.images && img.images.length > 0) {
+            this.images = img.images.concat(img.images);
+          }
+        })
       },
     );
   }
@@ -98,7 +105,7 @@ export class ProfileComponent implements OnInit {
           ...postData!.likes[0],
           isLiked: res.data.like,
         }];
-      } 
+      }
     })
   }
 
@@ -117,7 +124,7 @@ export class ProfileComponent implements OnInit {
     return formatDistanceToNow(date, { addSuffix: true, locale: vi });
   }
 
-  openDialogComment(){
+  openDialogComment() {
     const dialogRef = this.dialog.open(CommentComponent, {
       disableClose: true,
     });

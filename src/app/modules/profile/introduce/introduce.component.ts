@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-introduce',
@@ -10,17 +10,23 @@ export class IntroduceComponent {
 
   @Input() bio!: string
   @Input() address!: string;
-  @Input() phone!: number
   @Input() website!: string;
   @Input() workplace!: string
   @Input() education!: string;
-  @Input() birthdate!: string;
   @Input() userIdFromStorage: number | null | undefined;
   @Input() userId: number | null | undefined;
 
   public isBio: boolean = false;
   public isButtonActive: boolean = false;
   bioForm!: FormGroup;
+
+  constructor(
+    private fb: FormBuilder,
+  ) {
+    this.bioForm = this.fb.group({
+      bio: ['', Validators.required],
+    });
+  }
 
   handleBio() {
     this.isBio = !this.isBio;
@@ -33,7 +39,7 @@ export class IntroduceComponent {
   onTextareaChange() {
     this.isButtonActive = this.bio.trim() !== "";
   }
-  
+
   show() {
 
   }

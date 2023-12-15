@@ -5,8 +5,26 @@
   padding: 10px;
 }
 
+.icon-header{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: rgb(0, 81, 255);
+}
+
+.icon-header mat-icon{
+  color: #fff;
+}
+
 .header-left {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
 }
 
 .header-right {

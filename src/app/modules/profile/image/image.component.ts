@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { IgetAllPostImage } from '../../handle/interface';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-image',
@@ -6,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./image.component.scss']
 })
 export class ImageComponent {
-  items = [1,2,3,3,3,3,3,3,3,3];
+  @Input() images!: IgetAllPostImage[];
+  configUrl = environment.ApiUrl;
+
 }

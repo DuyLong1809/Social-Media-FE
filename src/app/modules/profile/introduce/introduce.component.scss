@@ -59,7 +59,7 @@ img {
   border: none;
   cursor: pointer;
   background: #3a3b3c;
-  color: #fff;
+  color: #e3e5ea;
   font-weight: 600;
 }
 .add-tieu-su {
@@ -68,7 +68,7 @@ img {
   gap: 4px;
 }
 .count-text {
-  color: #fff;
+  color: #e3e5ea;
   font-size: 13px;
   text-align: right;
 }
@@ -77,15 +77,16 @@ img {
   width: 100%;
   height: 76px;
   padding: 4px;
-  color: var(--while);
+  color: #e3e5ea;
   text-align: center;
   border-radius: 8px;
   background: #3a3b3c;
+  font-size: 16px;
 }
 
 .tieu-su-btn .btn_active {
   background: var(--main-color);
-  color: #fff;
+  color: #e3e5ea;
 }
 
 .tieu-su-btn .btn_disabled {
@@ -99,6 +100,28 @@ img {
 }
 
 .bio p {
-  color: #fff;
+  color: #e3e5ea;
   font-size: 16px;
+}
+
+.introduce_detail{
+  display: flex;
+  gap: 5px;
+}
+
+.introduce_detail mat-icon{
+  color: #e3e5ea;
+  font-size: 23px;
+}
+
+.introduce_detail p{
+  color: #e3e5ea;
+  font-size: 16px;
+}
+
+.introduce_d{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 18px;
 }

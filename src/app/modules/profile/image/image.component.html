@@ -1,18 +1,18 @@
 <div class="image">
-    <h1>Ảnh</h1>
+    <h1>Ảnh và Video</h1>
     <div class="image-tab">
         <mat-tab-group>
             <mat-tab label="Ảnh của bạn">
                 <div class="item">
-                    <div class="item-img" *ngFor="let item of items">
-                        <img src="https://bedental.vn/wp-content/uploads/2022/11/hot-girl_9.jpg" alt="">
+                    <div class="item-img" *ngFor="let item of images">
+                        <img [src]="configUrl + '/images/' + item.image_url" alt="">
                     </div>
                 </div>
             </mat-tab>
-            <mat-tab label="Album">
+            <mat-tab label="Video của bạn">
                 <div class="item">
-                    <div class="item-img" *ngFor="let item of items">
-                        <img src="https://www.nhaban.vn/gallery.nb/estates/5259229/medium/20_62fa079ce3f09.jpg" alt="">
+                    <div class="item-img" *ngFor="let item of images">
+                        <img [src]="configUrl + '/images/' + item.image_url" alt="">
                     </div>
                 </div>
             </mat-tab>

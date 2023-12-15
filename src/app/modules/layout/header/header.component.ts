@@ -31,6 +31,10 @@ export class HeaderComponent {
     );
   }
 
+  goBackHome(){
+    this.router.navigate(['home'])
+  }
+
   LogOut() {
     localStorage.clear();
     this.router.navigate(['account/login'])

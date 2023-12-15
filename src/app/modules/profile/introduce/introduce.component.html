@@ -21,7 +21,7 @@
         <form action="" [formGroup]="bioForm">
           <div class="add-tieu-su-input">
             <textarea
-              name=""
+              formControlName="bio"
               id=""
               cols="30"
               rows="10"
@@ -43,16 +43,35 @@
         </form>
       </div>
     </ng-template>
-
-    <div
-      class="introduce-btn"
-      *ngIf="userIdFromStorage === userId"
-      (click)="show()"
-    >
-      <div class="main-btn pointer">
-        <p>Chỉnh sửa chi tiết</p>
+    <div>
+      <div class="introduce_d">
+        <div class="introduce_detail">
+          <mat-icon>location_on</mat-icon>
+          <p>Hiện đang sống tại: {{ address }}</p>
+        </div>
+        <div class="introduce_detail">
+          <mat-icon>ads_click</mat-icon>
+          <p>Website: {{ website }}</p>
+        </div>
+        <div class="introduce_detail">
+          <mat-icon>apartment</mat-icon>
+          <p>Hiện đang làm việc tại: {{ workplace }}</p>
+        </div>
+        <div class="introduce_detail">
+          <mat-icon>school</mat-icon>
+          <p>Hiện đang học tại: {{ education }}</p>
+        </div>
       </div>
-    </div>
+      <div
+        class="introduce-btn"
+        *ngIf="userIdFromStorage === userId"
+        (click)="show()"
+      >
+        <div class="main-btn pointer">
+          <p>Chỉnh sửa chi tiết</p>
+        </div>
+      </div>
+    </div>    
     <div class="introduce-btn" *ngIf="userIdFromStorage === userId">
       <div class="main-btn pointer">
         <p>Thêm sở thích</p>

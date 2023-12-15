@@ -16,29 +16,13 @@
             <div class="right-item" *ngFor="let overview of overviews">
                 <ng-container *ngIf="overview.data; then data else default"></ng-container>
                 <ng-template #data>
-                    <div class="data-icon">
-                        <img src="assets/image/svg/Notification.svg" alt="">
-                    </div>
-                    <div class="data-text">đến từ <span>Hà Nội</span></div>
+                    <mat-icon class="data-icon">{{ overview.icon }}</mat-icon>
+                    <div class="data-text">{{ overview.data }}</div>
                 </ng-template>
                 <ng-template #default>
-                    <div class="right-item-icon">+</div>
-                    <div class="right-item-text">{{overview.title}}</div>
+                    <div class="right-item-icon" *ngIf="userIdFromStorage === userId">+</div>
+                    <div class="right-item-text" *ngIf="userIdFromStorage === userId">{{overview.title}}</div>
                 </ng-template>
-            </div>
-        </div>
-        <div class="right-sub">
-            <div class="right-phone">
-                <div class="phone-icon">
-                    <img src="assets/image/svg/Call.svg" alt="">
-                </div>
-                <div class="phone-text">
-                    <div class="text-phone">0123 456 789</div>
-                    <div class="text-type">di động</div>
-                </div>
-            </div>
-            <div class="right-phone-edit pointer">
-                <img src="assets/image/svg/Edit.svg" alt="">
             </div>
         </div>
     </div>

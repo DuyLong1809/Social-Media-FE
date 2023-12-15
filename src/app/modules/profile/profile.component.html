@@ -75,11 +75,9 @@
             <app-introduce
               [bio]="datas.bio"
               [address]="datas.address"
-              [phone]="datas.phone"
               [website]="datas.website"
               [workplace]="datas.workplace"
               [education]="datas.education"
-              [birthdate]="datas.birthdate"
               [userId]="userId"
               [userIdFromStorage]="userIdFromStorage"
             ></app-introduce>
@@ -176,16 +174,23 @@
       </mat-tab>
       <mat-tab label="Giới thiệu">
         <div class="layout_introduce">
-          <app-introduce2></app-introduce2>
+          <app-introduce2
+            [address]="datas.address"
+            [phone]="datas.phone"
+            [workplace]="datas.workplace"
+            [education]="datas.education"
+            [birthdate]="datas.birthdate"
+            [userId]="userId"
+            [userIdFromStorage]="userIdFromStorage"
+          ></app-introduce2>
         </div>
       </mat-tab>
       <mat-tab label="Bạn bè"></mat-tab>
-      <mat-tab label="Ảnh">
+      <mat-tab label="Ảnh & Video">
         <div class="layout_image">
-          <app-image></app-image>
+          <app-image [images]="images"></app-image>
         </div>
       </mat-tab>
-      <mat-tab label="Video"></mat-tab>
     </mat-tab-group>
   </div>
 </div>
