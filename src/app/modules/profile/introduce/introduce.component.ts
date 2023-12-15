@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-introduce',
@@ -6,7 +7,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./introduce.component.scss']
 })
 export class IntroduceComponent {
-  
+
   @Input() bio!: string
   @Input() address!: string;
   @Input() phone!: number
@@ -17,9 +18,23 @@ export class IntroduceComponent {
   @Input() userIdFromStorage: number | null | undefined;
   @Input() userId: number | null | undefined;
 
-  public isStory: boolean = false;
+  public isBio: boolean = false;
+  public isButtonActive: boolean = false;
+  bioForm!: FormGroup;
 
-  handleStory(){
-    this.isStory = !this.isStory;
+  handleBio() {
+    this.isBio = !this.isBio;
+  }
+
+  saveBio() {
+    this.isBio = false;
+  }
+
+  onTextareaChange() {
+    this.isButtonActive = this.bio.trim() !== "";
+  }
+  
+  show() {
+
   }
 }

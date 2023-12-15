@@ -1,0 +1,152 @@
+p{
+    margin-bottom: unset !important;
+}
+.main{
+    display: flex;
+}
+.main_left{
+    width: 25%;
+    padding: 16px 6px;
+    border-right: 1px solid #313334;
+}
+.main_left-title{
+    color: #FFF;
+    font-size: 20px;
+    font-weight: 600;
+    margin-left: 10px;
+    margin-bottom: 14px;
+}
+
+.main_left-menu{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.left-sub{
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.left-sub:hover{
+    background: #3a3b3c;
+}
+
+.left-sub p{
+    font-size: 15px;
+    color: #acafb4;
+}
+
+.active{
+    background: #233950;
+}
+.active:hover{
+    background: #233950;
+}
+.active p{
+    color: var(--main-color);
+    }
+
+.main_right{
+    width: 75%;
+    padding: 16px 32px 32px 16px;
+}
+
+.right{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 30px;
+}
+.right-item{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.right-item:hover .right-item-text{
+    text-decoration: underline;
+}
+
+.right-item-icon{
+    font-size: 20px;
+    color: var(--main-color);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid var(--main-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.right-sub{
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.right-item-text{
+    font-size: 15px;
+    color: var(--main-color);
+}
+
+.right-phone{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.phone-icon{
+    width: 24px;height: 24px;
+}
+.phone-icon img{
+    width: 100%;
+    height: 100%;
+}
+
+.phone-text .text-phone{
+    font-size: 15px;
+    color: #FFF;
+    font-weight: 500;
+}
+
+.phone-text .text-type{
+    font-size: 13px;
+    color: #FFF;
+    font-weight: 400;
+}
+
+.right-phone-edit{
+    width: 36px;height: 36px;
+    background: #3a3b3c;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.right-phone-edit img{
+    width: 20px;height: 20px;
+}
+
+.data-icon{
+    width: 24px;
+    height: 24px;
+}
+
+.data-icon img{
+    width: 100%;
+    height: 100%;
+}
+
+.data-text{
+    color: #FFF;
+    font-size: 15px;
+}
+
+.data-text span{
+    font-weight: 500;
+}
+
+.right-item-data{}

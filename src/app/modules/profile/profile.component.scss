@@ -174,12 +174,26 @@ p {
   width: 57%;
 }
 
-::ng-deep .mat-mdc-tab-label-container {
+::ng-deep .profile_body .mat-mdc-tab-label-container{
   padding-left: 180px;
   margin-bottom: 20px;
   background: #242526;
 }
 
+.layout_introduce{
+  background: #242526;
+  border-radius: 8px;
+  width: 1186px;
+  margin: 0 auto;
+}
+
+.layout_image{
+  padding: 16px;
+  background: #242526;
+  border-radius: 8px;
+  width: 1186px;
+  margin: 0 auto;
+}
 ::ng-deep .profile_body .mat-mdc-tab .mdc-tab__text-label {
   color: #fff;
 }

@@ -2,29 +2,53 @@
   <div class="introduce_content">
     <h2>Giới thiệu</h2>
     <ng-container
-      *ngIf="isStory; then showStory; else hideStory"
+      *ngIf="isBio; then showBio; else hideBio"
     ></ng-container>
-    <ng-template #hideStory>
+
+    <ng-template #hideBio>
+      <div class="bio" *ngIf="bio">
+        <p>{{ bio }}</p>
+      </div>
       <div class="introduce-btn" *ngIf="userIdFromStorage === userId">
-        <div class="main-btn pointer" (click)="handleStory()">
-          <p>Thêm tiểu sử</p>
+        <div class="main-btn pointer" (click)="handleBio()">
+          <p *ngIf="!bio">Thêm tiểu sử</p>
+          <p *ngIf="bio">Chỉnh sửa tiểu sử</p>
         </div>
       </div>
     </ng-template>
-    <ng-template #showStory>
+    <ng-template #showBio>
       <div class="add-tieu-su">
-        <div class="add-tieu-su-input">
-          <textarea name="" id="" cols="30" rows="10">{{ bio }}</textarea>
-        </div>
-        <div class="count-text">còn 100 ký tự</div>
-        <div class="tieu-su-btn">
-          <button class="btn-sub" (click)="handleStory()">Hủy</button>
-          <button class="btn-sub">Lưu</button>
-        </div>
+        <form action="" [formGroup]="bioForm">
+          <div class="add-tieu-su-input">
+            <textarea
+              name=""
+              id=""
+              cols="30"
+              rows="10"
+              [(ngModel)]="bio"
+              (input)="onTextareaChange()"
+            ></textarea>
+          </div>
+          <div class="tieu-su-btn">
+            <button class="btn-sub" (click)="handleBio()">Hủy</button>
+            <button
+              class="btn-sub btn_disabled"
+              (click)="saveBio()"
+              [class.btn_disabled]="!isButtonActive"
+              [class.btn_active]="isButtonActive"
+            >
+              Lưu
+            </button>
+          </div>
+        </form>
       </div>
     </ng-template>
 
-    <div class="introduce-btn" *ngIf="userIdFromStorage === userId">
+    <div
+      class="introduce-btn"
+      *ngIf="userIdFromStorage === userId"
+      (click)="show()"
+    >
       <div class="main-btn pointer">
         <p>Chỉnh sửa chi tiết</p>
       </div>
