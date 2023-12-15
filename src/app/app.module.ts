@@ -19,6 +19,7 @@ import { FormsModule } from '@angular/forms';
 import { ImageComponent } from './modules/profile/image/image.component';
 import { Introduce2Component } from './modules/profile/introduce2/introduce2.component';
 import { CommentComponent } from './modules/content/comment/comment.component';
+import { NotificationsComponent } from './modules/layout/header/notifications/notifications.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { CommentComponent } from './modules/content/comment/comment.component';
     FriendsComponent,
     ImageComponent,
     Introduce2Component,
-    CommentComponent
+    CommentComponent,
+    NotificationsComponent
   ],
   imports: [
     BrowserModule,

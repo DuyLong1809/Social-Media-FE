@@ -15,9 +15,13 @@
       <div class="icon">
         <mat-icon style="color: rgb(212, 4, 195)">forum</mat-icon>
       </div>
-      <div class="icon">
+      <div class="icon" (click)="showNotifi()" [matMenuTriggerFor]="menu">
         <mat-icon>notifications</mat-icon>
       </div>
+        <mat-menu #menu="matMenu">
+          <app-notifications></app-notifications>
+        </mat-menu>
+
       <div class="avatar-user" [matMenuTriggerFor]="menu">
         <img
           width="100%"
