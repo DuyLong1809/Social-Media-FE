@@ -15,10 +15,14 @@
       <div class="icon">
         <mat-icon style="color: rgb(212, 4, 195)">forum</mat-icon>
       </div>
-      <div class="icon">
+      <div class="icon" (click)="showNotifi()" [matMenuTriggerFor]="notification">
         <mat-icon>notifications</mat-icon>
       </div>
-      <div class="avatar-user" [matMenuTriggerFor]="menu">
+        <mat-menu #notification="matMenu">
+          <app-notifications></app-notifications>
+        </mat-menu>
+
+      <div class="avatar-user" [matMenuTriggerFor]="logout">
         <img
           width="100%"
           height="100%"
@@ -26,7 +30,7 @@
           alt=""
         />
       </div>
-      <mat-menu #menu="matMenu">
+      <mat-menu #logout="matMenu">
         <button class="logOut" mat-menu-item (click)="LogOut()">
           <mat-icon>logout</mat-icon>
           Đăng Xuất

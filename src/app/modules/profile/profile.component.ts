@@ -51,9 +51,10 @@ export class ProfileComponent implements OnInit {
           }
         });
 
-        result.data.posts.forEach(img => {
+        this.images = [];
+        result.data.posts.forEach (img => {
           if (img.images && img.images.length > 0) {
-            this.images = img.images.concat(img.images);
+            this.images = this.images.concat(img.images);
           }
         })
       },
