@@ -23,9 +23,9 @@ export class AppComponent {
       });
   }
 
-  // ngOnInit() {
-  //   if (localStorage.getItem('token') === null) {
-  //     this.router.navigate(['account/login']);
-  //   }
-  // }
+  ngOnInit() {
+    if (localStorage.getItem('token') === null) {
+      this.router.navigate(['account/login']);
+    }
+  }
 }

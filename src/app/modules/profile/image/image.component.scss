@@ -1,3 +1,7 @@
+.image{
+    height: 100%;
+}
+
 .image h1{
     font-size: 20px;
     color: #FFF;
@@ -8,10 +12,15 @@
     padding-left: 0 ;
 }
 
+.image-tab {
+    height: 100%;
+}
+
 .item{
     display: flex;
     flex-wrap: wrap;
     gap: 23px;
+    height: 368px;
 }
 .item-img{
     width: 173px;

@@ -9,6 +9,10 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class ImageComponent {
   @Input() images!: IgetAllPostImage[];
+  
   configUrl = environment.ApiUrl;
+
+  ngOnInit(): void{
+  }
 
 }

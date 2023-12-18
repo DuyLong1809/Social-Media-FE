@@ -41,8 +41,6 @@ export class HeaderComponent {
   }
 
   showNotifi(){
-    console.log(213);
-    
   }
 
 }
