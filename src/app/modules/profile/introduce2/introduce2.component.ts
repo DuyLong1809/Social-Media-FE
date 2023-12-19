@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { IgetAllPostImage } from '../../handle/interface';
 import { environment } from 'src/environments/environment.prod';
 
@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment.prod';
   templateUrl: './introduce2.component.html',
   styleUrls: ['./introduce2.component.scss']
 })
-export class Introduce2Component {
+export class Introduce2Component implements OnChanges {
 
   @Input() address!: string;
   @Input() phone!: number
@@ -17,11 +17,43 @@ export class Introduce2Component {
   @Input() userIdFromStorage: number | null | undefined;
   @Input() userId: number | null | undefined;
 
+  overviews: any[] = [];
   configUrl = environment.ApiUrl;
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    this.overviews = [
+      {
+        title: "Thêm nơi làm việc",
+        type: 1,
+        icon: 'apartment',
+        data: `Đang làm việc tại: ${this.workplace}`,
+      },
+      {
+        title: "Thêm trường cao đẳng/đại học",
+        type: 2,
+        icon: 'school',
+        data: `Đang theo học tại: ${this.education}`,
+      },
+      {
+        title: "Thêm tỉnh/thành phố hiện tại",
+        type: 3,
+        icon: 'location_on',
+        data: `Thành phố: ${this.address}`,
+      },
+      {
+        title: "Thêm quê quán",
+        type: 4,
+        icon: 'location_on',
+        data: `Sống tại: ${this.address}`,
+      },
+      {
+        title: "Thêm số điện thoại",
+        type: 5,
+        icon: 'phone',
+        data: `Số điện thoại: ${this.phone}`,
+      },
+    ];
   }
-
   public tabs = [
     { title: "Tổng quan", link: "", active: true },
     { title: "Công việc học vấn", link: "", active: false },
@@ -32,37 +64,6 @@ export class Introduce2Component {
     { title: "Sự kiện trong đời", link: "", active: false },
   ];
 
-  public overviews = [
-    {
-      title: "Thêm nơi làm việc",
-      type: 1,
-      icon: 'apartment',
-      data: `Đang làm việc tại: ${this.workplace}`,
-    },
-    {
-      title: "Thêm trường cao đẳng/đại học",
-      type: 2,
-      icon: 'school',
-      data: `Đang theo học tại: ${this.education}`,
-    },
-    {
-      title: "Thêm tỉnh/thành phố hiện tại",
-      type: 3,
-      icon: 'location_on',
-      data: `Thành phố: ${this.address}`,
-    },
-    {
-      title: "Thêm quê quán",
-      type: 4,
-      icon: 'location_on',
-      data: `Sống tại: ${this.address}`,
-    },
-    {
-      title: "Thêm số điện thoại",
-      type: 5,
-      icon: 'phone',
-      data: `Số điện thoại: ${this.phone}`,
-    },
-  ]
+
 
 }
