@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
-import { INameAvatarUserRespon, IUserRespon, IgetAllPostRespon } from './interface';
+import { IFriendStatusRespon, INameAvatarUserRespon, IUserRespon, IgetAllPostRespon } from './interface';
 
 @Injectable({
   providedIn: 'root'
@@ -22,12 +22,12 @@ export class HandleService {
     return this.http.get<INameAvatarUserRespon>(apiUrl);
   }
 
-  public updateProfileUser(data: any, id:number) {
-    const apiUrl = `${environment.ApiUrl}/update-profile/userId=${id}`;
-    return this.http.post<IgetAllPostRespon>(apiUrl, data);
+  public updateProfileUser(data: any, id: number) {
+    const apiUrl = `${environment.ApiUrl}/api/update-profile/userId=${id}`;
+    return this.http.post<IUserRespon>(apiUrl, data);
   }
-  
-  public getAllPost(){
+
+  public getAllPost() {
     const apiUrl = `${environment.ApiUrl}/api/get-post/all`;
     return this.http.get<IgetAllPostRespon>(apiUrl);
   }
@@ -41,14 +41,34 @@ export class HandleService {
     const apiUrl = `${environment.ApiUrl}/api/update-post/${id}`;
     return this.http.post<IgetAllPostRespon>(apiUrl, data);
   }
-  
-  public deletePost(postId: number, data:{}) {
+
+  public deletePost(postId: number, data: {}) {
     const apiUrl = `${environment.ApiUrl}/api/delete-post/${postId}`;
     return this.http.post(apiUrl, data);
   }
 
-  public likePost(postId: number, data:{}) {
+  public likePost(postId: number, data: {}) {
     const apiUrl = `${environment.ApiUrl}/api/like-post/postId=${postId}`;
+    return this.http.post<any>(apiUrl, data);
+  }
+
+  public getStatusFriendById(userId: number) {
+    const apiUrl = `${environment.ApiUrl}/api/friend/get-status/userId=${userId}`;
+    return this.http.get<IFriendStatusRespon>(apiUrl);
+  }
+
+  public addFriend(data: {}) {
+    const apiUrl = `${environment.ApiUrl}/api/friend/send-request`;
+    return this.http.post<any>(apiUrl, data);
+  }
+
+  public confirmFriend(data: {}) {
+    const apiUrl = `${environment.ApiUrl}/api/friend/confirm-request`;
+    return this.http.post<any>(apiUrl, data);
+  }
+
+  public cancelFriend(data: {}) {
+    const apiUrl = `${environment.ApiUrl}/api/friend/cancel-request`;
     return this.http.post<any>(apiUrl, data);
   }
 }

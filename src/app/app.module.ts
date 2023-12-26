@@ -20,6 +20,7 @@ import { ImageComponent } from './modules/profile/image/image.component';
 import { Introduce2Component } from './modules/profile/introduce2/introduce2.component';
 import { CommentComponent } from './modules/content/comment/comment.component';
 import { NotificationsComponent } from './modules/layout/header/notifications/notifications.component';
+import { EditProfileComponent } from './modules/profile/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { NotificationsComponent } from './modules/layout/header/notifications/no
     ImageComponent,
     Introduce2Component,
     CommentComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,

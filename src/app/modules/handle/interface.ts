@@ -13,6 +13,7 @@ export interface IUser {
   education: string;
   birthdate: string;
   posts: IgetAllPost[];
+  friends: IUser[];
 }
 
 export interface IUserRespon {
@@ -53,7 +54,6 @@ export interface IgetAllPostRespon {
   data: IgetAllPost[]
 }
 
-
 export interface ILikes {
   id: number;
   user_id: number;
@@ -63,5 +63,27 @@ export interface ILikes {
   updated_at: string;
 }
 
+export interface IFriends {
+  id: number;
+  user_id: number;
+  friend_id: number;
+  status: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface IFriendStatusById {
+  user_id: number;
+  friend_id: number;
+  status: number;
+}
+
+export interface IFriendStatus {
+  statusList: IFriendStatusById[],
+}
+
+export interface IFriendStatusRespon {
+  data: IFriendStatus,
+}
 
 

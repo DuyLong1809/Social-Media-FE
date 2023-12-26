@@ -24,7 +24,7 @@
 
           <div class="info-head-content">
             <h2 class="info-name">{{ datas.name }}</h2>
-            <p class="number_of_friends">10 bạn bè</p>
+            <p class="number_of_friends">{{ numberOfFriends.length }} bạn bè</p>
           </div>
         </div>
 
@@ -45,6 +45,7 @@
               class="info-body-btn"
               style="background: #3a3b3c"
               *ngIf="userIdFromStorage === userId"
+              (click)="openEditProfile()"
             >
               <div class="pen-icon">
                 <img src="assets/image/svg/pen.svg" alt="" />
@@ -53,144 +54,144 @@
             </div>
 
             <div
+              (click)="handleFriend(datas.id)"
               class="info-body-btn"
               style="background: var(--main-color)"
               *ngIf="userIdFromStorage !== userId"
             >
-              <div class="puls-icon">
-                <img src="assets/image/svg/add-circle.svg" alt="" />
-              </div>
-              <p style="color: var(--while)">Thêm bạn bè</p>
+              <p style="color: white">{{ getStatusText(datas.id) }}</p>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="profile_body">
-    <mat-tab-group>
-      <mat-tab label="Bài Viết">
-        <div class="profile_body-head">
-          <div class="profile_body-left">
-            <app-introduce
-              [bio]="datas.bio"
-              [address]="datas.address"
-              [website]="datas.website"
-              [workplace]="datas.workplace"
-              [education]="datas.education"
-              [userId]="userId"
-              [userIdFromStorage]="userIdFromStorage"
-            ></app-introduce>
-            <app-friends></app-friends>
-          </div>
-          <div class="profile_body-right">
-            <div *ngFor="let data of posts" class="posts">
-              <div class="content-posts">
-                <div class="header-post">
-                  <div class="header-post-user">
-                    <div class="av-user">
+    <div class="profile_body">
+      <mat-tab-group>
+        <mat-tab label="Bài Viết">
+          <div class="profile_body-head">
+            <div class="profile_body-left">
+              <app-introduce
+                [bio]="datas.bio"
+                [address]="datas.address"
+                [website]="datas.website"
+                [workplace]="datas.workplace"
+                [education]="datas.education"
+                [userId]="userId"
+                [userIdFromStorage]="userIdFromStorage"
+              ></app-introduce>
+              <app-friends [friendList]="friendList"></app-friends>
+            </div>
+            <div class="profile_body-right">
+              <div *ngFor="let data of posts" class="posts">
+                <div class="content-posts">
+                  <div class="header-post">
+                    <div class="header-post-user">
+                      <div class="av-user">
+                        <img
+                          width="100%"
+                          height="100%"
+                          [src]="configUrl + '/' + datas.avatar"
+                          alt=""
+                        />
+                      </div>
+                      <div class="title">
+                        <span>{{ datas.name }}</span>
+                        <div class="time">{{ timeAgo(data.updated_at) }}</div>
+                      </div>
+                    </div>
+                    <div>
+                      <mat-icon [matMenuTriggerFor]="menu">more_horiz</mat-icon>
+                      <mat-menu #menu="matMenu">
+                        <button
+                          mat-menu-item
+                          (click)="OpenDialogCreateEditPost(true, data)"
+                        >
+                          <mat-icon style="color: #9d9d9d">edit</mat-icon>
+                          Chỉnh sửa bài viết
+                        </button>
+                        <button
+                          mat-menu-item
+                          (click)="OpenDialogConfirm(data.id, data.user_id)"
+                        >
+                          <mat-icon style="color: #9d9d9d">delete</mat-icon>
+                          Xóa bài viết
+                        </button>
+                      </mat-menu>
+                    </div>
+                  </div>
+                  <div class="content-new">
+                    <p
+                      style="
+                        white-space: pre-line;
+                        margin-bottom: 12px !important;
+                      "
+                    >
+                      {{ data.content }}
+                    </p>
+                    <div *ngIf="data.images" class="img-post">
                       <img
                         width="100%"
                         height="100%"
-                        [src]="configUrl + '/' + datas.avatar"
+                        *ngIf="data.images[0]"
+                        [src]="
+                          configUrl + '/images/' + data.images[0].image_url
+                        "
                         alt=""
                       />
                     </div>
-                    <div class="title">
-                      <span>{{ datas.name }}</span>
-                      <div class="time">{{ timeAgo(data.updated_at) }}</div>
-                    </div>
                   </div>
+                </div>
+                <div class="articles-posts">
                   <div>
-                    <mat-icon [matMenuTriggerFor]="menu">more_horiz</mat-icon>
-                    <mat-menu #menu="matMenu">
-                      <button
-                        mat-menu-item
-                        (click)="OpenDialogCreateEditPost(true, data)"
-                      >
-                        <mat-icon style="color: #9d9d9d">edit</mat-icon>
-                        Chỉnh sửa bài viết
-                      </button>
-                      <button
-                        mat-menu-item
-                        (click)="OpenDialogConfirm(data.id, data.user_id)"
-                      >
-                        <mat-icon style="color: #9d9d9d">delete</mat-icon>
-                        Xóa bài viết
-                      </button>
-                    </mat-menu>
-                  </div>
-                </div>
-                <div class="content-new">
-                  <p
-                    style="
-                      white-space: pre-line;
-                      margin-bottom: 12px !important;
-                    "
-                  >
-                    {{ data.content }}
-                  </p>
-                  <div *ngIf="data.images" class="img-post">
-                    <img
-                      width="100%"
-                      height="100%"
-                      *ngIf="data.images[0]"
-                      [src]="configUrl + '/images/' + data.images[0].image_url"
-                      alt=""
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="articles-posts">
-                <div>
-                  <div class="articles-posts-up">
-                    <span> 100k lượt thích </span>
-                    <div style="display: flex; gap: 10px">
-                      <span>50k lượt bình luận</span>
-                      <span>40k lượt chia sẻ</span>
+                    <div class="articles-posts-up">
+                      <span> 100k lượt thích </span>
+                      <div style="display: flex; gap: 10px">
+                        <span>50k lượt bình luận</span>
+                        <span>40k lượt chia sẻ</span>
+                      </div>
                     </div>
-                  </div>
-                  <div class="articles-posts-down">
-                    <div class="article" (click)="toggleLike(data.id)">
-                      <mat-icon [style.color]="getLikeColor(data)">
-                        favorite
-                      </mat-icon>
-                      <span [style.color]="getLikeColor(data)"> Thích </span>
-                    </div>
-                    <div class="article" (click)="openDialogComment()">
-                      <mat-icon>comment</mat-icon>
-                      <span>Bình luận</span>
-                    </div>
-                    <div class="article">
-                      <mat-icon>share</mat-icon>
-                      <span>Chia sẻ</span>
+                    <div class="articles-posts-down">
+                      <div class="article" (click)="toggleLike(data.id)">
+                        <mat-icon [style.color]="getLikeColor(data)">
+                          favorite
+                        </mat-icon>
+                        <span [style.color]="getLikeColor(data)"> Thích </span>
+                      </div>
+                      <div class="article" (click)="openDialogComment(datas.name, datas.avatar, data.images[0].image_url)">
+                        <mat-icon>comment</mat-icon>
+                        <span>Bình luận</span>
+                      </div>
+                      <div class="article">
+                        <mat-icon>share</mat-icon>
+                        <span>Chia sẻ</span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </mat-tab>
-      <mat-tab label="Giới thiệu">
-        <div class="layout_introduce">
-          <app-introduce2
-            [address]="datas.address"
-            [phone]="datas.phone"
-            [workplace]="datas.workplace"
-            [education]="datas.education"
-            [birthdate]="datas.birthdate"
-            [userId]="userId"
-            [userIdFromStorage]="userIdFromStorage"
-          ></app-introduce2>
-        </div>
-      </mat-tab>
-      <mat-tab label="Bạn bè"></mat-tab>
-      <mat-tab label="Ảnh & Video">
-        <div class="layout_image">
-          <app-image [images]="images"></app-image>
-        </div>
-      </mat-tab>
-    </mat-tab-group>
+        </mat-tab>
+        <mat-tab label="Giới thiệu">
+          <div class="layout_introduce">
+            <app-introduce2
+              [address]="datas.address"
+              [phone]="datas.phone"
+              [workplace]="datas.workplace"
+              [education]="datas.education"
+              [birthdate]="datas.birthdate"
+              [userId]="userId"
+              [userIdFromStorage]="userIdFromStorage"
+            ></app-introduce2>
+          </div>
+        </mat-tab>
+        <mat-tab label="Bạn bè"></mat-tab>
+        <mat-tab label="Ảnh & Video">
+          <div class="layout_image">
+            <app-image [images]="images"></app-image>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
   </div>
 </div>

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { IUser } from './modules/handle/interface';
+import { HandleService } from './modules/handle/handle.service';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +14,14 @@ export class AppComponent {
 
   hideSidebar: boolean = false;
   hideHeader: boolean = false;
-  public friends = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
+  friendList: IUser[] = [];
+  userIdFromStorage: number | null | undefined;
+  configUrl = environment.ApiUrl;
 
   constructor(
-    private router: Router) {
+    private router: Router,
+    private handleService: HandleService,
+    ) {
     this.router.events
       .pipe(filter((event: any) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
@@ -27,5 +34,16 @@ export class AppComponent {
     if (localStorage.getItem('token') === null) {
       this.router.navigate(['account/login']);
     }
+    const userIdFromStorage = localStorage.getItem('userId');
+    this.userIdFromStorage = userIdFromStorage ? parseInt(userIdFromStorage, 10) : null;
+    this.getProfileById();
+  }
+
+  getProfileById() {
+    this.handleService.getProfileUser(this.userIdFromStorage!).subscribe(
+      (result) => {
+        this.friendList = result.data.friends;
+      },
+    );
   }
 }

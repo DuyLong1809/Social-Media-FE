@@ -9,6 +9,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogCreatePostComponent } from '../dialog-create-post/dialog-create-post.component';
 import { ActivatedRoute } from '@angular/router';
 import { CommentComponent } from '../content/comment/comment.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -17,11 +19,16 @@ import { CommentComponent } from '../content/comment/comment.component';
 })
 export class ProfileComponent implements OnInit {
 
+  statusFriend!: number;
+  userIdFriend: number | null | undefined;
   datas!: IUser;
   posts!: IgetAllPost[];
   images!: IgetAllPostImage[];
   userId: number | null | undefined;
   userIdFromStorage: number | null | undefined;
+  friendStatusList: any[] = [];
+  friendList: IUser[] = [];
+  numberOfFriends: any[] = [];
 
   configUrl = environment.ApiUrl;
 
@@ -36,6 +43,8 @@ export class ProfileComponent implements OnInit {
     const userIdFromStorage = localStorage.getItem('userId');
     this.userIdFromStorage = userIdFromStorage ? parseInt(userIdFromStorage, 10) : null;
     this.getProfileById();
+    this.getStatusFriend();
+    this.getFriend();
   }
 
   getProfileById() {
@@ -43,6 +52,7 @@ export class ProfileComponent implements OnInit {
       (result) => {
         this.datas = result.data;
         this.posts = result.data.posts;
+        this.friendList = result.data.friends;
 
         this.posts.forEach(post => {
           if (post.likes && post.likes.length > 0) {
@@ -52,7 +62,7 @@ export class ProfileComponent implements OnInit {
         });
 
         this.images = [];
-        result.data.posts.forEach (img => {
+        result.data.posts.forEach(img => {
           if (img.images && img.images.length > 0) {
             this.images = this.images.concat(img.images);
           }
@@ -125,9 +135,144 @@ export class ProfileComponent implements OnInit {
     return formatDistanceToNow(date, { addSuffix: true, locale: vi });
   }
 
-  openDialogComment() {
+  openDialogComment(nameUser: string, avatarUser: string, imgPost: string) {
     const dialogRef = this.dialog.open(CommentComponent, {
       disableClose: true,
+      data: {
+        avatarUser: avatarUser,
+        nameUser: nameUser,
+        imgPost: imgPost,
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.getProfileById();
+      }
+    });
+  }
+
+  getStatusFriend() {
+    this.handleService.getStatusFriendById(this.userIdFromStorage!).subscribe((res) => {
+      this.friendStatusList = res.data.statusList;
+    });
+  }
+
+  getFriend() {
+    this.handleService.getStatusFriendById(this.userId!).subscribe((res) => {
+      // const friendIds = res.data.statusList
+      //   .filter(friend => friend.status === 1)
+      //   .map(friend => friend.user_id);
+  
+      // const requests = friendIds.map(friendId => this.handleService.getNameAvatarUser(friendId));
+  
+      // forkJoin(requests).subscribe(users => {
+      //   this.friendList = users;
+      // });
+      // console.log(this.friendList);
+      this.numberOfFriends = res.data.statusList.filter(friend => friend.status === 1);
+    });
+  }
+
+  addFriend() {
+    const datas = {
+      user_id: this.userIdFromStorage,
+      friend_id: this.userId,
+    };
+
+    this.handleService.addFriend(datas).subscribe((res) => {
+      this.statusFriend = res.data.data.status;
+      this.userIdFriend = res.data.data.user_id;
+      this.getStatusFriend();
+      this.getProfileById();
+    });
+  }
+
+  confirmFriend(friendId: number) {
+    const datas = {
+      user_id: this.userIdFromStorage,
+      friend_id: friendId,
+    };
+
+    this.handleService.confirmFriend(datas).subscribe((res) => {
+      this.statusFriend = res.data.data.status;
+      this.getStatusFriend();
+    });
+  }
+
+  cancelFriend(friendId: number) {
+    const datas = {
+      user_id: this.userIdFromStorage,
+      friend_id: friendId,
+    };
+
+    this.handleService.cancelFriend(datas).subscribe((res) => {
+      this.statusFriend = res.data.data.status;
+      this.getStatusFriend();
+    });
+  }
+
+  handleFriend(friendId: number) {
+    const friendStatus = this.friendStatusList.find(item =>
+      (item.user_id === this.userIdFromStorage && item.friend_id === friendId) ||
+      (item.user_id === friendId && item.friend_id === this.userIdFromStorage)
+    );
+
+    if (friendStatus) {
+      switch (friendStatus.status) {
+        case 0:
+          if (this.userIdFromStorage === friendStatus.user_id) {
+            this.cancelFriend(friendId);
+          } else {
+            this.confirmFriend(friendId);
+          }
+          break;
+
+        case 1:
+          this.cancelFriend(friendId);
+          break;
+
+        case 2:
+          if (this.userIdFromStorage === friendStatus.user_id) {
+            this.cancelFriend(friendId);
+          } else {
+            this.addFriend();
+          }
+          break;
+
+        default:
+          break;
+      }
+    } else {
+      this.addFriend();
+    }
+  }
+
+  getStatusText(friendId: number): string {
+    const friendStatus = this.friendStatusList.find(item =>
+      (item.user_id === this.userIdFromStorage && item.friend_id === friendId) ||
+      (item.user_id === friendId && item.friend_id === this.userIdFromStorage)
+    );
+
+    if (friendStatus) {
+      switch (friendStatus.status) {
+        case 0:
+          return (this.userIdFromStorage === friendStatus.user_id) ? 'Hủy lời mời' : 'Xác nhận lời mời';
+        case 1:
+          return 'Bạn bè';
+        case 2:
+          return (this.userIdFromStorage === friendStatus.user_id) ? 'Thêm bạn bè' : 'Thêm bạn bè';
+        default:
+          return 'Thêm bạn bè';
+      }
+    }
+    return 'Thêm bạn bè';
+  }
+
+  openEditProfile() {
+    const dialogRef = this.dialog.open(EditProfileComponent, {
+      data: {
+        data: this.datas
+      }
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {

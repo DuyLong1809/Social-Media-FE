@@ -1,0 +1,50 @@
+<div class="account-login">
+  <div class="container">
+    <header class="title">
+      <h1>Chỉnh sửa chi tiết trang cá nhân</h1>
+    </header>
+    <div class="content">
+      <div class="input-login">
+        <form method="" action="" [formGroup]="editProfile">
+          <mat-form-field appearance="outline" class="input">
+            <mat-label>Full name</mat-label>
+            <input matInput formControlName="name"/>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="input">
+            <mat-label>Choose a birthdate</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="birthdate">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="input">
+            <mat-label>Address</mat-label>
+            <input matInput formControlName="address"/>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="input">
+            <mat-label>Phone</mat-label>
+            <input matInput formControlName="phone"/>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="input">
+            <mat-label>Workplace</mat-label>
+            <input matInput formControlName="workplace"/>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="input">
+            <mat-label>Website</mat-label>
+            <input matInput formControlName="website"/>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="input">
+            <mat-label>Education</mat-label>
+            <input matInput formControlName="education"/>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="input">
+            <mat-label>Bio</mat-label>
+            <textarea matInput formControlName="bio"></textarea>
+          </mat-form-field>
+          <button (click)="Submit()" type="button" class="btn-submit-input" mat-raised-button>
+            Continue
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

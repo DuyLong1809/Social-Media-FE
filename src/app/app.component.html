@@ -22,14 +22,11 @@
         </div>
 
         <div class="content-friends-body">
-          <div class="item" *ngFor="let friend of friends">
+          <div class="item" *ngFor="let friend of friendList">
             <div class="item-image">
-              <img
-                src="https://img2.thuthuatphanmem.vn/uploads/2019/01/04/anh-gai-xinh-dep_025100741.jpg"
-                alt=""
-              />
+              <img [src]="configUrl + '/' + friend.avatar" alt="" />
             </div>
-            <div class="item-name">Nguyễn Quang Duy</div>
+            <div class="item-name">{{ friend.name }}</div>
           </div>
         </div>
       </div>

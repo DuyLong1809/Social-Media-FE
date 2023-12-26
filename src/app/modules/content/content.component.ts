@@ -29,8 +29,7 @@ export class ContentComponent {
     public dialog: MatDialog,
     private handleService: HandleService,
     private router: Router,
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     const userIdFromStorage = localStorage.getItem('userId');

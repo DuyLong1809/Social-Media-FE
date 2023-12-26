@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-friends',
@@ -6,5 +8,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./friends.component.scss']
 })
 export class FriendsComponent {
-  public listFriend = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  @Input() friendList: any[] = [];
+
+  configUrl = environment.ApiUrl;
+
+  constructor(
+    private router: Router,
+  ) {}
+
+  openProfile(id: number) {
+    return this.router.navigate([`profile/${id}`]);
+  }
 }
