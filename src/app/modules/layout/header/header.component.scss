@@ -5,7 +5,7 @@
   padding: 10px;
 }
 
-.icon-header{
+.icon-header {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,7 +16,7 @@
   background-color: #3f51b5;
 }
 
-.icon-header mat-icon{
+.icon-header mat-icon {
   color: #fff;
 }
 
@@ -53,6 +53,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
+  object-fit: cover;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -98,4 +99,35 @@ mat-menu {
 
 mat-icon {
   color: #bcbcbc;
+}
+
+.item {
+  padding: 8px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.item:hover{
+  background-color: #404040;
+  border-radius: 8px;
+}
+
+.item-image {
+  width: 36px;
+  height: 36px;
+}
+
+.item-image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.item-name {
+  font-size: 15px;
+  color: var(--while);
+  font-weight: 600;
 }

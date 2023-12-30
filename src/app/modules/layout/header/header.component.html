@@ -5,7 +5,44 @@
         <mat-icon>tsunami</mat-icon>
       </div>
       <div>
-        <input class="search" type="search" placeholder="Search" />
+        <form [formGroup]="searchForm">
+          <div>
+            <input
+              formControlName="searchTerm"
+              [matMenuTriggerFor]="menu"
+              (input)="onSearch()"
+              class="search"
+              placeholder="Search"
+            />
+          </div>
+        </form>
+        <mat-menu #menu="matMenu">
+          <div *ngIf="searchData.length > 0">
+            <div *ngFor="let item of searchData">
+              <div class="item" (click)="openProfile(item.id)">
+                <div class="item-image">
+                  <img
+                    *ngIf="item.avatar === null"
+                    src="https://i.stack.imgur.com/l60Hf.png"
+                    alt=""
+                  />
+                  <img
+                    *ngIf="item.avatar !== null"
+                    [src]="configUrl + '/' + item.avatar"
+                    alt=""
+                  />
+                </div>
+                <div class="item-name">{{ item.name }}</div>
+              </div>
+            </div>
+          </div>
+          <div
+            *ngIf="searchData.length <= 0"
+            style="color: white; text-align: center"
+          >
+            Không có dữ liệu
+          </div>
+        </mat-menu>
       </div>
     </div>
     <div class="header-right">

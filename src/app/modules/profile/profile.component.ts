@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CommentComponent } from '../content/comment/comment.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { forkJoin } from 'rxjs';
+import { EditAvatarComponent } from './edit-avatar/edit-avatar.component';
 
 @Component({
   selector: 'app-profile',
@@ -271,6 +272,21 @@ export class ProfileComponent implements OnInit {
     const dialogRef = this.dialog.open(EditProfileComponent, {
       data: {
         data: this.datas
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.getProfileById();
+      }
+    });
+  }
+
+  openEditImage(avatar: string, coverPhoto: string) {
+    const dialogRef = this.dialog.open(EditAvatarComponent, {
+      data: {
+        userId: this.userId,
+        avatar: avatar,
+        coverPhoto: coverPhoto,
       }
     });
     dialogRef.afterClosed().subscribe(result => {

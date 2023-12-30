@@ -24,6 +24,7 @@ import { EditProfileComponent } from './modules/profile/edit-profile/edit-profil
 import { Friends2Component } from './modules/profile/friends2/friends2.component';
 import { Image2Component } from './modules/profile/image2/image2.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { EditAvatarComponent } from './modules/profile/edit-avatar/edit-avatar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +43,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     EditProfileComponent,
     Friends2Component,
     Image2Component,
+    EditAvatarComponent,
   ],
   imports: [
     BrowserModule,

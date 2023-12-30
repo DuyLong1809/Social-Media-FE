@@ -1,0 +1,87 @@
+<div style="height: 76vh; width: 350px; padding: 30px">
+  <div>
+    <header class="title">
+      <h1 style="text-align: center">Chỉnh sửa ảnh cá nhân</h1>
+    </header>
+  </div>
+  <div>
+    <form action="" style="display: flex; flex-direction: column; gap: 20px">
+      <div>
+        <span style="font-size: 15px;">Ảnh đại diện</span>
+        <div class="avatar">
+          <div class="img-avatar">
+            <img
+              *ngIf="avatar === null"
+              height="100%"
+              width="100%"
+              [src]="
+                selectedImage
+                  ? selectedImage
+                  : 'https://i.stack.imgur.com/l60Hf.png'
+              "
+              alt=""
+            />
+            <img
+              *ngIf="avatar !== null"
+              height="100%"
+              width="100%"
+              [src]="selectedImage ? selectedImage : configUrl + '/' + avatar"
+              alt=""
+            />
+          </div>
+          <div style="position: absolute" (click)="openSelectImgAvatar()">
+            <mat-icon>add_circle</mat-icon>
+          </div>
+          <input
+            #selectFileInput
+            type="file"
+            style="display: none"
+            (change)="onFileSelected($event)"
+          />
+        </div>
+      </div>
+      <div>
+        <span style="font-size: 15px;">Ảnh bìa</span>
+        <div class="avatar" style="margin-top: 10px;">
+          <div class="img-cover">
+            <img
+              *ngIf="coverPhoto === null"
+              height="100%"
+              width="100%"
+              [src]="coverImageUrl ? coverImageUrl : null"
+              alt=""
+            />
+            <img
+              *ngIf="coverPhoto !== null"
+              height="100%"
+              width="100%"
+              [src]="
+                coverImageUrl ? coverImageUrl : configUrl + '/' + coverPhoto
+              "
+              alt=""
+            />
+          </div>
+          <div style="position: absolute" (click)="openSelectImgCover()">
+            <mat-icon>add_circle</mat-icon>
+          </div>
+          <input
+            type="file"
+            #selectCoverInput
+            style="display: none"
+            (change)="handleCoverImageChange($event)"
+          />
+        </div>
+      </div>
+      <div>
+        <button
+          (click)="Submit()"
+          type="button"
+          class="btn-submit"
+          mat-raised-button
+        >
+          Sửa
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

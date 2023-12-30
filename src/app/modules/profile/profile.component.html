@@ -32,13 +32,14 @@
           <div class="info-body-sub">
             <div
               class="info-body-btn"
-              style="background: var(--main-color)"
+              style="background: #3a3b3c"
               *ngIf="userIdFromStorage === userId"
+              (click)="openEditImage(datas.avatar, datas.cover_photo)"
             >
-              <div class="puls-icon">
-                <img src="assets/image/svg/add-circle.svg" alt="" />
+              <div class="pen-icon">
+                <img src="assets/image/svg/pen.svg" alt="" />
               </div>
-              <p style="color: var(--while)">Thêm vào tin</p>
+              <p style="color: var(--while)">Chỉnh sửa ảnh</p>
             </div>
 
             <div

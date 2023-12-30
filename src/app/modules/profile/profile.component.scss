@@ -50,6 +50,7 @@ p {
 
 .info_avatar img {
   border-radius: 50%;
+  object-fit: cover;
   border: 2px solid #18191a;
 }
 
@@ -300,4 +301,5 @@ p {
 
 .av-user img {
   border-radius: 50%;
+  object-fit: cover;
 }

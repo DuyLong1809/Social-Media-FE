@@ -27,6 +27,16 @@ export class HandleService {
     return this.http.post<IUserRespon>(apiUrl, data);
   }
 
+  public updateImgProfileUser(data: any, id: number) {
+    const apiUrl = `${environment.ApiUrl}/api/update-img-profile/userId=${id}`;
+    return this.http.post<IUserRespon>(apiUrl, data);
+  }
+
+  public searchUser(query: string) {
+    const apiUrl = `${environment.ApiUrl}/api/users/search/query=${query}`;
+    return this.http.get<any>(apiUrl);
+  }
+
   public getAllPost() {
     const apiUrl = `${environment.ApiUrl}/api/get-post/all`;
     return this.http.get<IgetAllPostRespon>(apiUrl);

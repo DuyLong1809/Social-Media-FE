@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment.prod';
 import { HandleService } from '../../handle/handle.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-header',
@@ -10,15 +11,22 @@ import { HandleService } from '../../handle/handle.service';
 })
 export class HeaderComponent {
 
+  searchForm!: FormGroup;
   userId!: number | null;
   avatarUser!: string | null
+  searchData: any[] = [];
 
   configUrl = environment.ApiUrl;
 
   constructor(
     private router: Router,
     private handleService: HandleService,
-  ) { }
+    private fb: FormBuilder,
+  ) {
+    this.searchForm = this.fb.group({
+      searchTerm: [''],
+    });
+  }
 
   ngOnInit() {
     const userIdFromStorage = localStorage.getItem('userId');
@@ -31,7 +39,7 @@ export class HeaderComponent {
     );
   }
 
-  goBackHome(){
+  goBackHome() {
     this.router.navigate(['home'])
   }
 
@@ -40,7 +48,24 @@ export class HeaderComponent {
     this.router.navigate(['account/login'])
   }
 
-  showNotifi(){
+  showNotifi() {
   }
 
+  onSearch() {
+    const searchTerm = this.searchForm.value.searchTerm;
+    if (searchTerm.trim() !== '') {
+      this.handleService.searchUser(searchTerm).subscribe(
+        (data: any) => {
+          this.searchData = data.data;
+        },
+        (error) => {
+          console.error('Error fetching search data:', error);
+        }
+      );
+    }
+  }
+
+  openProfile(id: number) {
+    return this.router.navigate([`profile/${id}`]);
+  }
 }
