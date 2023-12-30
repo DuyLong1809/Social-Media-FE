@@ -29,6 +29,7 @@
 
 .avatar-user img {
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .av-user {
@@ -102,6 +103,11 @@
 }
 
 .img-post {
+  width: 100%;
+  height: auto;
+}
+
+.img-post-1 {
   width: 100%;
   height: auto;
 }

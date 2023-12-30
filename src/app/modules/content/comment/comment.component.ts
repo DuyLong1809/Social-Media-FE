@@ -11,8 +11,17 @@ export class CommentComponent {
 
   nameUser!: string | null;
   avatarUser!: string | null;
-  imgPost!: string | null;
+  imgPost!: any[];
   configUrl = environment.ApiUrl;
+
+  slideConfig = {
+    'arrows': true,
+    'autoplay': false,
+    'infinite': true,
+    'speed': 300,  
+    'slidesToShow': 1,
+    'slidesToScroll': 1,
+  };
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -21,4 +30,6 @@ export class CommentComponent {
     this.nameUser = data.nameUser,
     this.imgPost = data.imgPost
   }
+  ngOnInit() {}
+
 }

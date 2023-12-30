@@ -16,17 +16,57 @@
 
     <ng-container *ngIf="!hideSidebar">
       <div class="content-friends">
-        <div class="content-friends-head">
-          <div class="friends-head-title">Người liên hệ</div>
-          <div class="friends-head-icon"></div>
-        </div>
+        <div
+          style="
+            border-bottom: 1px solid #ccc;
+            padding: 10px;
+            padding-bottom: 20px;
+          "
+        >
+          <div class="suggest-friends-head">
+            <div class="friends-head-title">Gợi ý kết bạn</div>
+            <div class="friends-head-icon"></div>
+          </div>
 
-        <div class="content-friends-body">
-          <div class="item" *ngFor="let friend of friendList">
-            <div class="item-image">
-              <img [src]="configUrl + '/' + friend.avatar" alt="" />
+          <div class="content-friends-body">
+            <div class="suggest-item">
+              <div class="suggest-item-content">
+                <div class="item-image">
+                  <img
+                    src="https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/07/hinh-dep-20.jpg"
+                    alt=""
+                  />
+                </div>
+                <div class="item-name">aSDSADASD</div>
+              </div>
+              <div class="suggest-item-btn">
+                <button mat-flat-button color="primary">Thêm bạn</button>
+              </div>
             </div>
-            <div class="item-name">{{ friend.name }}</div>
+          </div>
+        </div>
+        <div style="padding: 10px">
+          <div class="content-friends-head">
+            <div class="friends-head-title">Người liên hệ</div>
+            <div class="friends-head-icon"></div>
+          </div>
+
+          <div class="content-friends-body">
+            <div class="item" *ngFor="let friend of friendList">
+              <div class="item-image">
+                <img
+                  *ngIf="!friend.avatar"
+                  src="https://i.stack.imgur.com/l60Hf.png"
+                  alt=""
+                />
+                <img
+                  *ngIf="friend.avatar"
+                  [src]="configUrl + '/' + friend.avatar"
+                  alt=""
+                />
+              </div>
+              <div class="item-name">{{ friend.name }}</div>
+            </div>
           </div>
         </div>
       </div>

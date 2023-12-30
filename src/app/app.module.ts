@@ -21,7 +21,9 @@ import { Introduce2Component } from './modules/profile/introduce2/introduce2.com
 import { CommentComponent } from './modules/content/comment/comment.component';
 import { NotificationsComponent } from './modules/layout/header/notifications/notifications.component';
 import { EditProfileComponent } from './modules/profile/edit-profile/edit-profile.component';
-
+import { Friends2Component } from './modules/profile/friends2/friends2.component';
+import { Image2Component } from './modules/profile/image2/image2.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +40,8 @@ import { EditProfileComponent } from './modules/profile/edit-profile/edit-profil
     CommentComponent,
     NotificationsComponent,
     EditProfileComponent,
+    Friends2Component,
+    Image2Component,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +49,8 @@ import { EditProfileComponent } from './modules/profile/edit-profile/edit-profil
     BrowserAnimationsModule,
     SharedModule,
     AccountModule,
-    FormsModule
+    FormsModule,
+    SlickCarouselModule,
   ],
   providers: [
     {

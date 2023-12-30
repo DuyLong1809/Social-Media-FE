@@ -1,13 +1,27 @@
 <div class="container">
   <div class="wrapper">
     <div class="cmt-left">
-      <div class="cmt-img">
-        <img
-          height="100%"
-          width="100%"
-          [src]="configUrl + '/images/' + imgPost"
-          alt=""
-        />
+      <div class="cmt-img" *ngIf="imgPost.length > 1">
+        <ngx-slick-carousel [config]="slideConfig">
+          <div ngxSlickItem *ngFor="let image of imgPost">
+            <img
+              width="100%"
+              height="100%"
+              [src]="configUrl + '/images/' + image.image_url"
+              alt=""
+            />
+          </div>
+        </ngx-slick-carousel>
+      </div>
+      <div *ngIf="imgPost.length === 1">
+        <div class="cmt-img-1" *ngFor="let image of imgPost">
+          <img
+            width="100%"
+            height="100%"
+            [src]="configUrl + '/images/' + image.image_url"
+            alt=""
+          />
+        </div>
       </div>
     </div>
     <div class="cmt-right">

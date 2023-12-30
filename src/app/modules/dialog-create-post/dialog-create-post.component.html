@@ -10,60 +10,88 @@
         <div class="content-header">
           <div class="avatar-user">
             <img
+              *ngIf="avatarUser !== null"
               width="100%"
               height="100%"
               [src]="configUrl + '/' + avatarUser"
               alt=""
             />
+            <img
+              *ngIf="avatarUser === null"
+              width="100%"
+              height="100%"
+              src="https://i.stack.imgur.com/l60Hf.png"
+              alt=""
+            />
           </div>
           <span>{{ nameUser }}</span>
         </div>
-        <form  action="" [formGroup]="postForm">
+        <form
+          action=""
+          [formGroup]="postForm"
+          style="display: flex; flex-direction: column; gap: 30px"
+        >
           <div class="formPost">
             <textarea
               class="textarea"
               id=""
-              rows="9"
+              rows="3"
               placeholder="Bạn đang nghĩ gì thế?"
               formControlName="content"
             >
             </textarea>
             <div *ngIf="editMode" class="img-post">
-              <img
-                width="100%"
-                height="100%"
-                [src]="configUrl + '/images/' + postData.images[0].image_url"
-                alt=""
-              />
+              <ngx-slick-carousel [config]="slideConfig">
+                <div
+                  ngxSlickItem
+                  *ngFor="let image of postData.images; let i = index"
+                >
+                  <img
+                    width="100%"
+                    height="100%"
+                    [src]="configUrl + '/images/' + image.image_url"
+                    alt=""
+                  />
+                  <mat-icon (click)="removeImage(i)" class="remove-image-button"
+                    >close</mat-icon
+                  >
+                </div>
+              </ngx-slick-carousel>
             </div>
           </div>
-          <div class="input-file">
-            <span>Thêm vào bài viết</span>
-            <div class="select-input-file">
-              <input type="file" (change)="onFileSelected($event)" />
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div class="input-file">
+              <span>Thêm vào bài viết</span>
+              <div class="select-input-file">
+                <input
+                  type="file"
+                  (change)="onFilesSelected($event)"
+                  multiple
+                />
+              </div>
             </div>
-          </div>
-          <div style="width: 100%; margin-top: 20px">
-            <button
-              *ngIf="!editMode"
-              (click)="handleSubmit()"
-              type="button"
-              class="btn-submit"
-              mat-raised-button
-              color="primary"
-            >
-              Đăng bài viết
-            </button>
-            <button
-              *ngIf="editMode"
-              (click)="handleSubmit()"
-              type="button"
-              class="btn-submit"
-              mat-raised-button
-              color="primary"
-            >
-              Sửa bài viết
-            </button>
+            <div style="width: 100%">
+              <button
+                *ngIf="!editMode"
+                (click)="handleSubmit()"
+                type="button"
+                class="btn-submit"
+                mat-raised-button
+                color="primary"
+              >
+                Đăng bài viết
+              </button>
+              <button
+                *ngIf="editMode"
+                (click)="handleSubmit()"
+                type="button"
+                class="btn-submit"
+                mat-raised-button
+                color="primary"
+              >
+                Sửa bài viết
+              </button>
+            </div>
           </div>
         </form>
       </div>

@@ -50,6 +50,10 @@
             <input matInput formControlName="workplace"/>
           </mat-form-field>
           <mat-form-field appearance="outline" class="input">
+            <mat-label>Website</mat-label>
+            <input matInput formControlName="website"/>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="input">
             <mat-label>Education</mat-label>
             <input matInput formControlName="education"/>
           </mat-form-field>
@@ -57,14 +61,6 @@
             <mat-label>Bio</mat-label>
             <textarea matInput formControlName="bio"></textarea>
           </mat-form-field>
-          <div>
-            <p>chọn ảnh đại diện</p>
-            <input type="file" (change)="onFileSelectedImg($event)">
-          </div>
-          <div>
-            <p>chọn ảnh bìa</p>
-            <input type="file" (change)="onFileSelectedImg_Cover($event)">
-          </div>
           <p>
             By registering an account, you also accept
             <a style="text-decoration: none; color: #138eed; cursor: pointer"

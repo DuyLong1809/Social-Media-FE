@@ -1,8 +1,7 @@
 <div class="friends">
   <div class="friends-content">
     <div class="friends-content-head">
-      <h2>Bạn bè</h2>
-      <p>Xem tất cả bạn bè</p>
+      <h2>Bạn bè của bạn</h2>
     </div>
     <p class="count-friend">{{ friendList.length }} bạn bè</p>
   </div>
@@ -10,7 +9,16 @@
   <div class="friends-body">
     <div class="friend" *ngFor="let item of friendList">
       <div class="friend-image" (click)="openProfile(item.id)">
-        <img [src]="configUrl + '/' + item.avatar" alt="" />
+        <img
+          *ngIf="!item.avatar"
+          src="https://i.stack.imgur.com/l60Hf.png"
+          alt=""
+        />
+        <img 
+          *ngIf="item.avatar" 
+          [src]="configUrl + '/' + item.avatar" 
+          alt="" 
+        />
       </div>
       <p class="friend-name">{{ item.name }}</p>
     </div>

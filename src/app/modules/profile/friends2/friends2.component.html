@@ -1,0 +1,50 @@
+<div class="image">
+  <h1>Bạn Bè</h1>
+  <div class="image-tab">
+    <div style="display: flex; gap: 25px">
+      <div class="item" *ngFor="let item of friendList">
+        <div
+          style="display: flex; justify-content: center; align-items: center"
+        >
+          <div class="item-img">
+            <img
+              *ngIf="!item.avatar"
+              src="https://i.stack.imgur.com/l60Hf.png"
+              alt=""
+            />
+            <img
+              *ngIf="item.avatar"
+              [src]="configUrl + '/' + item.avatar"
+              alt=""
+            />
+          </div>
+          <div
+            style="display: flex; justify-content: center; align-items: center"
+          >
+            <p class="name-friend">{{ item.name }}</p>
+          </div>
+        </div>
+        <div
+          *ngIf="userIdFromStorage === userId"
+          style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 20px;
+          "
+        >
+          <mat-icon
+            style="color: #ccc; cursor: pointer"
+            [matMenuTriggerFor]="menu"
+            >more_horiz</mat-icon
+          >
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="cancelFriend(item.id)">
+              Hủy kết bạn
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

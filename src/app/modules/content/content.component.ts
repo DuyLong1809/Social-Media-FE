@@ -9,8 +9,6 @@ import { environment } from 'src/environments/environment.prod';
 import { DialogConfirmComponent } from '../dialog-confirm/dialog-confirm.component';
 import { Router } from '@angular/router';
 import { CommentComponent } from './comment/comment.component';
-import { count } from 'rxjs';
-
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
@@ -25,13 +23,23 @@ export class ContentComponent {
   configUrl = environment.ApiUrl;
   countLikes!: number;
 
+  slideConfig = {
+    'arrows': true,
+    'autoplay': false,
+    'infinite': true,
+    'speed': 300,
+    'slidesToShow': 1,
+    'slidesToScroll': 1,
+  };
+
   constructor(
     public dialog: MatDialog,
     private handleService: HandleService,
     private router: Router,
-  ) {}
+  ) { }
 
   ngOnInit() {
+    this.getAllPost();
     const userIdFromStorage = localStorage.getItem('userId');
     this.userId = userIdFromStorage ? parseInt(userIdFromStorage, 10) : null;
     if (this.userId !== null) {
@@ -41,7 +49,6 @@ export class ContentComponent {
           this.nameUser = result.data.name
         })
     }
-    this.getAllPost();
   }
 
   isPostOwner(userId: number): boolean {
@@ -59,7 +66,6 @@ export class ContentComponent {
   getAllPost() {
     this.handleService.getAllPost().subscribe((res) => {
       this.datas = res.data;
-
       this.datas.forEach(post => {
         if (post.likes && post.likes.length > 0) {
           const userLiked = post.likes.some(like => like.user_id === this.userId && like.isLiked);
@@ -118,7 +124,7 @@ export class ContentComponent {
           updated_at: '',
           isLiked: res.data.like,
         }];
-      } 
+      }
     })
   }
 
@@ -133,7 +139,7 @@ export class ContentComponent {
     return this.router.navigate([`profile/${id}`]);
   }
 
-  openDialogComment(nameUser: string, avatarUser: string, imgPost: string) {
+  openDialogComment(nameUser: string, avatarUser: string, imgPost: any[]) {
     const dialogRef = this.dialog.open(CommentComponent, {
       disableClose: true,
       data: {

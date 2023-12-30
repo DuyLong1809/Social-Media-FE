@@ -1,6 +1,7 @@
 .container {
   background-color: #272727;
   width: 500px;
+  height: 550px;
   padding: 10px;
 }
 
@@ -33,6 +34,7 @@
 
 .avatar-user img {
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .content-header {
@@ -66,6 +68,14 @@
 
 .textarea::-webkit-scrollbar-track {
   background-color: #272727;
+}
+
+.remove-image-button{
+  color: rgb(16, 16, 16);
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  margin-left: 38.5%;
 }
 
 .textarea:focus {
@@ -122,7 +132,7 @@ input::file-selector-button {
 
 .formPost{
   overflow-y: auto;
-  height: 230px;
+  height: 287px;
 }
 
 .formPost::-webkit-scrollbar {

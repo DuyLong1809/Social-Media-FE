@@ -29,6 +29,7 @@ export class SidebarComponent {
       (result) => {
         this.avatarUser = result.data.avatar
         this.nameUser = result.data.name
+        
       },
     );
   }

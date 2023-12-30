@@ -15,12 +15,20 @@ export class DialogCreatePostComponent {
   postForm!: FormGroup;
   nameUser!: string | null;
   avatarUser!: string | null;
-  selectedFileImg!: File;
+  selectedFileImg: File[] = [];
+  selectedIdFileImg: string[] = [];
   userId!: number;
   postData: any;
   editMode!: boolean;
 
   configUrl = environment.ApiUrl;
+
+  slideConfig = {
+    'autoplay': false,
+    'speed': 300,
+    'slidesToShow': 1,
+    'slidesToScroll': 1,
+  };
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -30,8 +38,8 @@ export class DialogCreatePostComponent {
     private fb: FormBuilder,
   ) {
     this.avatarUser = data.avatarUser,
-    this.nameUser = data.nameUser,
-    this.postData = data.postData,
+      this.nameUser = data.nameUser,
+      this.postData = data.postData,
       this.editMode = data.editMode,
       this.postForm = this.fb.group({
         content: ['', Validators.required],
@@ -51,10 +59,17 @@ export class DialogCreatePostComponent {
     }
   }
 
-  onFileSelected(event: Event) {
+  removeImage(index: number): void {
+    const removedImage = this.postData.images.splice(index, 1)[0];
+    if (removedImage.id) {
+      this.selectedIdFileImg.push(removedImage.id);
+    }
+  }
+
+  onFilesSelected(event: Event) {
     const input = event.target as HTMLInputElement;
-    if (input?.files && input.files.length > 0) {
-      this.selectedFileImg = input.files[0];
+    if (input?.files) {
+      this.selectedFileImg = Array.from(input.files);
     }
   }
 
@@ -63,7 +78,9 @@ export class DialogCreatePostComponent {
     formData.append('user_id', this.userId.toString());
     formData.append('content', this.postForm.value.content);
     formData.append('view_count_news', '');
-    formData.append('image', this.selectedFileImg);
+    for (let i = 0; i < this.selectedFileImg.length; i++) {
+      formData.append('images[]', this.selectedFileImg[i]);
+    }
 
     this.handleService.createPost(formData).subscribe(
       (res) => {
@@ -81,7 +98,12 @@ export class DialogCreatePostComponent {
     formData.append('user_id', this.userId.toString());
     formData.append('content', this.postForm.value.content);
     formData.append('view_count_news', '');
-    formData.append('image', this.selectedFileImg);
+    for (const id of this.selectedIdFileImg) {
+      formData.append('deletedImages[]', id);
+    }
+    for (let i = 0; i < this.selectedFileImg.length; i++) {
+      formData.append('images[]', this.selectedFileImg[i]);
+    }
 
     this.handleService.updatePost(formData, this.postData.id).subscribe(
       (res) => {

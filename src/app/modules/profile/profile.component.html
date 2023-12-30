@@ -79,6 +79,7 @@
                 [userId]="userId"
                 [userIdFromStorage]="userIdFromStorage"
               ></app-introduce>
+              <app-image2 [images]="images"></app-image2>
               <app-friends [friendList]="friendList"></app-friends>
             </div>
             <div class="profile_body-right">
@@ -88,8 +89,12 @@
                     <div class="header-post-user">
                       <div class="av-user">
                         <img
-                          width="100%"
-                          height="100%"
+                          *ngIf="!datas.avatar"
+                          src="https://i.stack.imgur.com/l60Hf.png"
+                          alt=""
+                        />
+                        <img
+                          *ngIf="datas.avatar"
                           [src]="configUrl + '/' + datas.avatar"
                           alt=""
                         />
@@ -123,16 +128,37 @@
                     <p
                       style="
                         white-space: pre-line;
-                        margin-bottom: 12px !important;
+                        margin-bottom: 10px !important;
                       "
                     >
                       {{ data.content }}
                     </p>
-                    <div *ngIf="data.images" class="img-post">
+                    <div
+                      *ngIf="data.images && data.images.length > 1"
+                      class="img-post"
+                    >
+                      <ngx-slick-carousel
+                        class="carousel"
+                        #slickModal="slick-carousel"
+                        [config]="slideConfig"
+                      >
+                        <div ngxSlickItem *ngFor="let image of data.images">
+                          <img
+                            width="100%"
+                            height="100%"
+                            [src]="configUrl + '/images/' + image.image_url"
+                            alt=""
+                          />
+                        </div>
+                      </ngx-slick-carousel>
+                    </div>
+                    <div
+                      *ngIf="data.images && data.images.length === 1"
+                      class="img-post"
+                    >
                       <img
                         width="100%"
                         height="100%"
-                        *ngIf="data.images[0]"
                         [src]="
                           configUrl + '/images/' + data.images[0].image_url
                         "
@@ -157,7 +183,16 @@
                         </mat-icon>
                         <span [style.color]="getLikeColor(data)"> Thích </span>
                       </div>
-                      <div class="article" (click)="openDialogComment(datas.name, datas.avatar, data.images[0].image_url)">
+                      <div
+                        class="article"
+                        (click)="
+                          openDialogComment(
+                            datas.name,
+                            datas.avatar,
+                            data.images
+                          )
+                        "
+                      >
                         <mat-icon>comment</mat-icon>
                         <span>Bình luận</span>
                       </div>
@@ -185,7 +220,11 @@
             ></app-introduce2>
           </div>
         </mat-tab>
-        <mat-tab label="Bạn bè"></mat-tab>
+        <mat-tab label="Bạn bè">
+          <div class="layout_image">
+            <app-friends2 [friendList]="friendList"></app-friends2>
+          </div>
+        </mat-tab>
         <mat-tab label="Ảnh & Video">
           <div class="layout_image">
             <app-image [images]="images"></app-image>

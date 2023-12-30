@@ -32,6 +32,15 @@ export class ProfileComponent implements OnInit {
 
   configUrl = environment.ApiUrl;
 
+  slideConfig = {
+    'arrows': true,
+    'autoplay': false,
+    'infinite': true,
+    'speed': 300,
+    'slidesToShow': 1,
+    'slidesToScroll': 1,
+  };
+
   constructor(
     public dialog: MatDialog,
     private handleService: HandleService,
@@ -135,7 +144,7 @@ export class ProfileComponent implements OnInit {
     return formatDistanceToNow(date, { addSuffix: true, locale: vi });
   }
 
-  openDialogComment(nameUser: string, avatarUser: string, imgPost: string) {
+  openDialogComment(nameUser: string, avatarUser: string, imgPost: any[]) {
     const dialogRef = this.dialog.open(CommentComponent, {
       disableClose: true,
       data: {
@@ -159,16 +168,6 @@ export class ProfileComponent implements OnInit {
 
   getFriend() {
     this.handleService.getStatusFriendById(this.userId!).subscribe((res) => {
-      // const friendIds = res.data.statusList
-      //   .filter(friend => friend.status === 1)
-      //   .map(friend => friend.user_id);
-  
-      // const requests = friendIds.map(friendId => this.handleService.getNameAvatarUser(friendId));
-  
-      // forkJoin(requests).subscribe(users => {
-      //   this.friendList = users;
-      // });
-      // console.log(this.friendList);
       this.numberOfFriends = res.data.statusList.filter(friend => friend.status === 1);
     });
   }

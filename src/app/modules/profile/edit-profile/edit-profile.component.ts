@@ -53,8 +53,6 @@ export class EditProfileComponent {
 
   updateProfile() {
     const formattedBirthdate = format(this.editProfile.value.birthdate, 'yyyy-MM-dd');
-    console.log(formattedBirthdate);
-
     const formData = new FormData();
     formData.append('name', this.editProfile.value.name);
     formData.append('bio', this.editProfile.value.bio);
@@ -67,9 +65,12 @@ export class EditProfileComponent {
 
     this.handleService.updateProfileUser(formData, this.userIdFromStorage!).subscribe(
       (res) => {
-      this.dialogRef.close(true);
-      this.snackBar.openSnackBar('Sửa thông tin thành công', 'successBar')
-    })
+        this.dialogRef.close(true);
+        this.snackBar.openSnackBar('Sửa thông tin thành công', 'successBar')
+      },
+      (error) => {
+        this.snackBar.openSnackBar('Sửa thông tin thất bại', 'successBar')
+      })
   }
 
   Submit() {

@@ -36,20 +36,6 @@ export class RegisterComponent {
     });
   }
 
-  onFileSelectedImg(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input?.files && input.files.length > 0) {
-      this.selectedFileImg = input.files[0];
-    }
-  }
-
-  onFileSelectedImg_Cover(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input?.files && input.files.length > 0) {
-      this.selectedFileImg_Cover = input.files[0];
-    }
-  }
-
   registerSubmit() {
     const formattedBirthdate = format(this.registerForm.value.birthdate, 'yyyy-MM-dd');
 
@@ -57,8 +43,6 @@ export class RegisterComponent {
     formData.append('name', this.registerForm.value.name);
     formData.append('email', this.registerForm.value.email);
     formData.append('password', this.registerForm.value.password);
-    formData.append('avatar', this.selectedFileImg);
-    formData.append('cover_photo', this.selectedFileImg_Cover);
     formData.append('bio', this.registerForm.value.bio);
     formData.append('address', this.registerForm.value.address);
     formData.append('phone', this.registerForm.value.phone);

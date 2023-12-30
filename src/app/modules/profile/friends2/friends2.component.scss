@@ -1,0 +1,42 @@
+.image{
+  height: 100%;
+}
+
+.image h1{
+  font-size: 20px;
+  color: #FFF;
+  font-weight: 600;
+}
+
+.image-tab ::ng-deep .mat-mdc-tab-label-container{
+  padding-left: 0 ;
+}
+
+.item{
+  display: flex;
+  width: 35%;
+  justify-content: space-between;
+  gap: 8px;
+  border: 1px solid #919191;
+  border-radius: 8px;
+}
+.item-img{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 150px;
+  height: 150px;
+}
+
+.item img{
+  width: 75%;
+  height: 75%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.name-friend{
+  font-size: 15px;
+  color: white;
+}

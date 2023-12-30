@@ -1,0 +1,15 @@
+<div class="friends">
+  <div class="friends-content">
+    <div class="friends-content-head">
+      <h2>Ảnh của bạn</h2>
+    </div>
+  </div>
+
+  <div class="friends-body">
+    <div class="friend" *ngFor="let item of images">
+      <div class="friend-image">
+        <img [src]="configUrl + '/images/' + item.image_url" alt="" />
+      </div>
+    </div>
+  </div>
+</div>
