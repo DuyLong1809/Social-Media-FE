@@ -81,4 +81,24 @@ export class HandleService {
     const apiUrl = `${environment.ApiUrl}/api/friend/cancel-request`;
     return this.http.post<any>(apiUrl, data);
   }
+
+  public getCommentbyPost(postId: number) {
+    const apiUrl = `${environment.ApiUrl}/api/post/get-comment/postId=${postId}`;
+    return this.http.get<any[]>(apiUrl);
+  }
+
+  public createComment(data: any) {
+    const apiUrl = `${environment.ApiUrl}/api/post/create-comment`;
+    return this.http.post(apiUrl, data);
+  }
+
+  public updateComment(data: any, id: number) {
+    const apiUrl = `${environment.ApiUrl}/api/post/update-comment/${id}`;
+    return this.http.post(apiUrl, data);
+  }
+
+  public deleteComment(cmtId: number, data: any) {
+    const apiUrl = `${environment.ApiUrl}/api/post/delete-comment/${cmtId}`;
+    return this.http.post(apiUrl, data);
+  }
 }

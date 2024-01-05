@@ -34,14 +34,14 @@
           <div class="header-post-user">
             <div class="av-user" (click)="openProfile(data.user.id)">
               <img
-                *ngIf="avatarUser !== null"
+                *ngIf="data.user.avatar !== null"
                 width="100%"
                 height="100%"
                 [src]="configUrl + '/' + data.user.avatar"
                 alt=""
               />
               <img
-                *ngIf="avatarUser === null"
+                *ngIf="data.user.avatar === null"
                 width="100%"
                 height="100%"
                 src="https://i.stack.imgur.com/l60Hf.png"
@@ -104,9 +104,9 @@
       <div class="articles-posts">
         <div>
           <div class="articles-posts-up">
-            <span> 100k lượt thích </span>
+            <span> {{ data.likes.length }} lượt thích </span>
             <div style="display: flex; gap: 10px">
-              <span>50k lượt bình luận</span>
+              <span>{{ data.comments.length }} lượt bình luận</span>
               <span>40k lượt chia sẻ</span>
             </div>
           </div>
@@ -118,7 +118,7 @@
             <div
               class="article"
               (click)="
-                openDialogComment(data.user.name, data.user.avatar, data.images)
+                openDialogComment(data.user.name, data.user.avatar, data.images, data.id)
               "
             >
               <mat-icon>comment</mat-icon>

@@ -42,12 +42,106 @@
         <mat-icon style="cursor: pointer" mat-dialog-close>close</mat-icon>
       </div>
       <div class="cmt-content">
-        <h1>Chưa có bình luận nào</h1>
+        <div *ngIf="datas.length <= 0" class="no-cmt-content">
+          <h1>Chưa có bình luận nào</h1>
+        </div>
+        <div class="cmt" *ngFor="let data of datas">
+          <div class="suggest-item-content">
+            <div class="item-image">
+              <img
+                *ngIf="data.avatar !== null"
+                width="100%"
+                height="100%"
+                [src]="configUrl + '/' + data.avatar"
+                alt=""
+              />
+              <img
+                *ngIf="data.avatar === null"
+                width="100%"
+                height="100%"
+                src="https://i.stack.imgur.com/l60Hf.png"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="cmts">
+            <div
+              style="
+                background-color: #404040;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                border-radius: 8px;
+                padding: 8px;
+              "
+            >
+              <div class="item-name">{{ data.name }}</div>
+              <ng-container *ngIf="editModeId !== data.id; else editMode">
+                <span style="color: #c6c6c6; white-space: pre-line">
+                  {{ data.content }}
+                </span>
+              </ng-container>
+            </div>
+            <ng-template #editMode>
+              <form action="" [formGroup]="cmtForm">
+                <textarea
+                  [(ngModel)]="editedContent"
+                  formControlName="editContent"
+                  cols="30"
+                  rows="1"
+                  style="
+                    color: #cfc9bf;
+                    white-space: pre-line;
+                    resize: none;
+                    background-color: #272727;
+                    border: none;
+                    border-radius: 8px;
+                    padding: 10px;
+                  "
+                ></textarea>
+                <div
+                  style="display: flex; justify-content: flex-end; gap: 10px"
+                >
+                  <div (click)="updateComment(data.id)">
+                    <span
+                      style="color: #9b9b9a; cursor: pointer; font-size: 12px"
+                      >Lưu</span
+                    >
+                  </div>
+                  <div (click)="cancelEdit()">
+                    <span
+                      style="color: #9b9b9a; cursor: pointer; font-size: 12px"
+                      >Hủy</span
+                    >
+                  </div>
+                </div>
+              </form>
+            </ng-template>
+            <div class="handle-cmt" *ngIf="data.user_id === userId">
+              <span
+                *ngIf="editModeId !== data.id"
+                style="color: #5d5d5d; cursor: pointer; font-size: 12px"
+                (click)="startEditing(data.id, data.content)"
+              >
+                Sửa
+              </span>
+
+              <span
+                (click)="deleteComment(data.id)"
+                style="color: #5d5d5d; cursor: pointer; font-size: 12px"
+                >Xóa
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
-      <form action="">
+      <form action="" [formGroup]="cmtForm">
         <div class="cmt-footer">
-          <textarea placeholder="Thêm bình luận..."></textarea>
-          <div class="btn">
+          <textarea
+            formControlName="content"
+            placeholder="Thêm bình luận..."
+          ></textarea>
+          <div class="btn" (click)="submit()">
             <mat-icon style="cursor: pointer">send</mat-icon>
           </div>
         </div>

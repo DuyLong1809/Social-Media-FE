@@ -12,6 +12,7 @@ import { CommentComponent } from '../content/comment/comment.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { forkJoin } from 'rxjs';
 import { EditAvatarComponent } from './edit-avatar/edit-avatar.component';
+import { SnackBarComponent } from 'src/shared/snack-bar/snack-bar.component';
 
 @Component({
   selector: 'app-profile',
@@ -43,6 +44,7 @@ export class ProfileComponent implements OnInit {
   };
 
   constructor(
+    private snackBar: SnackBarComponent,
     public dialog: MatDialog,
     private handleService: HandleService,
     private route: ActivatedRoute,
@@ -145,10 +147,12 @@ export class ProfileComponent implements OnInit {
     return formatDistanceToNow(date, { addSuffix: true, locale: vi });
   }
 
-  openDialogComment(nameUser: string, avatarUser: string, imgPost: any[]) {
+  openDialogComment(nameUser: string, avatarUser: string, imgPost: any[], postId: number) {
     const dialogRef = this.dialog.open(CommentComponent, {
       disableClose: true,
       data: {
+        postId: postId,
+        userId: this.userIdFromStorage,
         avatarUser: avatarUser,
         nameUser: nameUser,
         imgPost: imgPost,
@@ -179,12 +183,18 @@ export class ProfileComponent implements OnInit {
       friend_id: this.userId,
     };
 
-    this.handleService.addFriend(datas).subscribe((res) => {
-      this.statusFriend = res.data.data.status;
-      this.userIdFriend = res.data.data.user_id;
-      this.getStatusFriend();
-      this.getProfileById();
-    });
+    this.handleService.addFriend(datas).subscribe(
+      (res) => {
+        this.statusFriend = res.data.data.status;
+        this.userIdFriend = res.data.data.user_id;
+        this.getStatusFriend();
+        this.getProfileById();
+        this.snackBar.openSnackBar('Thêm bạn bè thành công', 'successBar')
+      },
+      (error) => {
+        this.snackBar.openSnackBar('Thêm bạn bè thất bại', 'errorBar')
+      }
+    );
   }
 
   confirmFriend(friendId: number) {
@@ -193,10 +203,16 @@ export class ProfileComponent implements OnInit {
       friend_id: friendId,
     };
 
-    this.handleService.confirmFriend(datas).subscribe((res) => {
-      this.statusFriend = res.data.data.status;
-      this.getStatusFriend();
-    });
+    this.handleService.confirmFriend(datas).subscribe(
+      (res) => {
+        this.statusFriend = res.data.data.status;
+        this.getStatusFriend();
+        this.snackBar.openSnackBar('Xác nhận thành công', 'successBar')
+      },
+      (error) => {
+        this.snackBar.openSnackBar('Xác nhận thất bại', 'errorBar')
+      }
+    );
   }
 
   cancelFriend(friendId: number) {
@@ -205,10 +221,16 @@ export class ProfileComponent implements OnInit {
       friend_id: friendId,
     };
 
-    this.handleService.cancelFriend(datas).subscribe((res) => {
-      this.statusFriend = res.data.data.status;
-      this.getStatusFriend();
-    });
+    this.handleService.cancelFriend(datas).subscribe(
+      (res) => {
+        this.statusFriend = res.data.data.status;
+        this.getStatusFriend();
+        this.snackBar.openSnackBar('Hủy thành công', 'successBar')
+      },
+      (error) => {
+        this.snackBar.openSnackBar('Hủy thất bại', 'errorBar')
+      }
+    );
   }
 
   handleFriend(friendId: number) {

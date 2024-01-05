@@ -171,9 +171,9 @@
                 <div class="articles-posts">
                   <div>
                     <div class="articles-posts-up">
-                      <span> 100k lượt thích </span>
+                      <span> {{ data.likes.length }} lượt thích </span>
                       <div style="display: flex; gap: 10px">
-                        <span>50k lượt bình luận</span>
+                        <span>{{ data.comments.length }} lượt bình luận</span>
                         <span>40k lượt chia sẻ</span>
                       </div>
                     </div>
@@ -190,7 +190,8 @@
                           openDialogComment(
                             datas.name,
                             datas.avatar,
-                            data.images
+                            data.images,
+                            data.id
                           )
                         "
                       >

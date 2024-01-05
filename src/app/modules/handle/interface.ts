@@ -37,6 +37,7 @@ export interface IgetAllPost {
   user: IUser;
   images: IgetAllPostImage[];
   likes: ILikes[];
+  comments: any[];
   created_at: string;
   updated_at: string;
 }

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { RegisterService } from '../service/register.service';
 import { IRegister } from '../interface/register-Interface';
 import { format } from 'date-fns';
+import { SnackBarComponent } from 'src/shared/snack-bar/snack-bar.component';
 
 @Component({
   selector: 'app-register',
@@ -18,6 +19,7 @@ export class RegisterComponent {
   selectedFileImg_Cover!: File;
 
   constructor(
+    private snackBar: SnackBarComponent,
     private router: Router,
     private registerService: RegisterService,
     private fb: FormBuilder,
@@ -52,8 +54,12 @@ export class RegisterComponent {
     formData.append('birthdate', formattedBirthdate);
 
     this.registerService.authRegister(formData).subscribe(
-      () => {
+      (res) => {
+        this.snackBar.openSnackBar('Đăng kí thành công', 'successBar')
         this.router.navigate(['account/login']);
+      },
+      (error) => {
+        this.snackBar.openSnackBar('Đăng kí thất bại', 'errorBar')
       })
   }
 

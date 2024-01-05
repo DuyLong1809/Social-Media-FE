@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LoginInterface } from '../interface/login-Interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../service/login.service';
+import { SnackBarComponent } from 'src/shared/snack-bar/snack-bar.component';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,7 @@ export class LoginComponent {
   loginForm!: FormGroup;
 
   constructor(
+    private snackBar: SnackBarComponent,
     private router: Router,
     private loginService: LoginService,
     private fb: FormBuilder,
@@ -40,7 +42,11 @@ export class LoginComponent {
         localStorage.setItem('token', response.token);
         localStorage.setItem('userId', response.data.id);
         this.router.navigate(['home']);
+        this.snackBar.openSnackBar('Đăng nhập thành công', 'successBar')
       },
+      (error)=> {
+        this.snackBar.openSnackBar('Đăng nhập thất bại', 'successBar')
+      }
     )
   }
 }

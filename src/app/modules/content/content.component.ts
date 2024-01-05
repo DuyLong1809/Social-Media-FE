@@ -65,7 +65,7 @@ export class ContentComponent {
 
   getAllPost() {
     this.handleService.getAllPost().subscribe((res) => {
-      this.datas = res.data;
+      this.datas = res.data;    
       this.datas.forEach(post => {
         if (post.likes && post.likes.length > 0) {
           const userLiked = post.likes.some(like => like.user_id === this.userId && like.isLiked);
@@ -139,10 +139,12 @@ export class ContentComponent {
     return this.router.navigate([`profile/${id}`]);
   }
 
-  openDialogComment(nameUser: string, avatarUser: string, imgPost: any[]) {
+  openDialogComment(nameUser: string, avatarUser: string, imgPost: any[], postId: number) {
     const dialogRef = this.dialog.open(CommentComponent, {
       disableClose: true,
       data: {
+        postId: postId,
+        userId: this.userId,
         avatarUser: avatarUser,
         nameUser: nameUser,
         imgPost: imgPost,
