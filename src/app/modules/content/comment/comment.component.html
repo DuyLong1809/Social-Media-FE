@@ -37,6 +37,7 @@
           </div>
           <div class="title">
             <span>{{ nameUser }}</span>
+            <div class="time">{{ timeAgo(updatedAt) }}</div>
           </div>
         </div>
         <mat-icon style="cursor: pointer" mat-dialog-close>close</mat-icon>
@@ -139,6 +140,7 @@
                     gap: 10px;
                   "
                 >
+                  <div class="time">{{ timeAgo(data.updated_at) }}</div>
                   <div class="handle-cmt" *ngIf="data.user_id === userId">
                     <span
                       *ngIf="editModeId !== data.id"
@@ -267,6 +269,7 @@
                       gap: 10px;
                     "
                   >
+                    <div class="time">{{ timeAgo(reply.updated_at) }}</div>
                     <div class="handle-cmt" *ngIf="reply.user_id === userId">
                       <span
                         *ngIf="editModeId !== reply.id"

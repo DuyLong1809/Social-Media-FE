@@ -139,7 +139,7 @@ export class ContentComponent {
     return this.router.navigate([`profile/${id}`]);
   }
 
-  openDialogComment(nameUser: string, avatarUser: string, imgPost: any[], postId: number) {
+  openDialogComment(nameUser: string, avatarUser: string, imgPost: any[], postId: number, updatedAt: any) {
     const dialogRef = this.dialog.open(CommentComponent, {
       disableClose: true,
       data: {
@@ -148,6 +148,7 @@ export class ContentComponent {
         avatarUser: avatarUser,
         nameUser: nameUser,
         imgPost: imgPost,
+        updatedAt: updatedAt,
       }
     });
     dialogRef.afterClosed().subscribe(result => {

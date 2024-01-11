@@ -4,7 +4,8 @@ import { environment } from 'src/environments/environment.prod';
 import { HandleService } from '../../handle/handle.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SnackBarComponent } from 'src/shared/snack-bar/snack-bar.component';
-
+import { formatDistanceToNow } from 'date-fns';
+import vi from 'date-fns/locale/vi';
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
@@ -24,6 +25,7 @@ export class CommentComponent {
   avatarUser!: string | null;
   imgPost!: any[];
   datas!: any[];
+  updatedAt!: any; 
   configUrl = environment.ApiUrl;
 
   slideConfig = {
@@ -50,11 +52,20 @@ export class CommentComponent {
       this.userId = data.userId,
       this.avatarUser = data.avatarUser,
       this.nameUser = data.nameUser,
-      this.imgPost = data.imgPost
+      this.imgPost = data.imgPost,
+      this.updatedAt = data.updatedAt
   }
 
   ngOnInit() {
     this.getComment();
+  }
+
+  timeAgo(dateString: string | null) {
+    if (!dateString) {
+      return 'Invalid date';
+    }
+    const date = new Date(dateString);
+    return formatDistanceToNow(date, { addSuffix: true, locale: vi });
   }
 
   startReplying(name: string, id: number) {
