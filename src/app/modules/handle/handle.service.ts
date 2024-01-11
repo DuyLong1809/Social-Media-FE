@@ -92,6 +92,11 @@ export class HandleService {
     return this.http.post(apiUrl, data);
   }
 
+  public createReply(data: any) {
+    const apiUrl = `${environment.ApiUrl}/api/post/create-reply`;
+    return this.http.post(apiUrl, data);
+  }
+
   public updateComment(data: any, id: number) {
     const apiUrl = `${environment.ApiUrl}/api/post/update-comment/${id}`;
     return this.http.post(apiUrl, data);

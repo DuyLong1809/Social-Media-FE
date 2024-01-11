@@ -45,94 +45,261 @@
         <div *ngIf="datas.length <= 0" class="no-cmt-content">
           <h1>Chưa có bình luận nào</h1>
         </div>
-        <div class="cmt" *ngFor="let data of datas">
-          <div class="suggest-item-content">
-            <div class="item-image">
-              <img
-                *ngIf="data.avatar !== null"
-                width="100%"
-                height="100%"
-                [src]="configUrl + '/' + data.avatar"
-                alt=""
-              />
-              <img
-                *ngIf="data.avatar === null"
-                width="100%"
-                height="100%"
-                src="https://i.stack.imgur.com/l60Hf.png"
-                alt=""
-              />
+        <div style="display: flex; flex-direction: column">
+          <div class="cmt" *ngFor="let data of datas">
+            <div style="display: flex">
+              <div class="suggest-item-content">
+                <div class="item-image">
+                  <img
+                    *ngIf="data.avatar !== null"
+                    width="100%"
+                    height="100%"
+                    [src]="configUrl + '/' + data.avatar"
+                    alt=""
+                  />
+                  <img
+                    *ngIf="data.avatar === null"
+                    width="100%"
+                    height="100%"
+                    src="https://i.stack.imgur.com/l60Hf.png"
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div class="cmts">
+                <div
+                  style="
+                    background-color: #404040;
+                    display: flex;
+                    justify-content: center;
+                    flex-direction: column;
+                    border-radius: 8px;
+                    padding: 8px;
+                  "
+                >
+                  <div class="item-name">{{ data.name }}</div>
+                  <ng-container *ngIf="editModeId !== data.id; else editMode">
+                    <span style="color: #c6c6c6; white-space: pre-line">
+                      {{ data.content }}
+                    </span>
+                  </ng-container>
+                </div>
+                <ng-template #editMode>
+                  <form action="" [formGroup]="cmtForm">
+                    <textarea
+                      [(ngModel)]="editedContent"
+                      formControlName="editContent"
+                      cols="30"
+                      rows="1"
+                      style="
+                        color: #cfc9bf;
+                        white-space: pre-line;
+                        resize: none;
+                        background-color: #272727;
+                        border: none;
+                        border-radius: 8px;
+                        padding: 10px;
+                      "
+                    ></textarea>
+                    <div
+                      style="
+                        display: flex;
+                        justify-content: flex-end;
+                        gap: 10px;
+                      "
+                    >
+                      <div (click)="updateComment(data.id)">
+                        <span
+                          style="
+                            color: #9b9b9a;
+                            cursor: pointer;
+                            font-size: 12px;
+                          "
+                          >Lưu</span
+                        >
+                      </div>
+                      <div (click)="cancelEdit()">
+                        <span
+                          style="
+                            color: #9b9b9a;
+                            cursor: pointer;
+                            font-size: 12px;
+                          "
+                          >Hủy</span
+                        >
+                      </div>
+                    </div>
+                  </form>
+                </ng-template>
+                <div
+                  style="
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-around;
+                    gap: 10px;
+                  "
+                >
+                  <div class="handle-cmt" *ngIf="data.user_id === userId">
+                    <span
+                      *ngIf="editModeId !== data.id"
+                      style="color: #5d5d5d; cursor: pointer; font-size: 12px"
+                      (click)="startEditing(data.id, data.content)"
+                    >
+                      Sửa
+                    </span>
+
+                    <span
+                      (click)="deleteComment(data.id)"
+                      style="color: #5d5d5d; cursor: pointer; font-size: 12px"
+                      >Xóa
+                    </span>
+                  </div>
+                  <span
+                    (click)="startReplying(data.name, data.id)"
+                    style="color: #5d5d5d; cursor: pointer; font-size: 12px"
+                    >Trả lời
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="data.replies && data.replies.length > 0">
+              <ng-container
+                *ngTemplateOutlet="
+                  recursiveTemplate;
+                  context: { $implicit: data.replies }
+                "
+              ></ng-container>
             </div>
           </div>
-          <div class="cmts">
-            <div
-              style="
-                background-color: #404040;
-                display: flex;
-                justify-content: center;
-                flex-direction: column;
-                border-radius: 8px;
-                padding: 8px;
-              "
-            >
-              <div class="item-name">{{ data.name }}</div>
-              <ng-container *ngIf="editModeId !== data.id; else editMode">
-                <span style="color: #c6c6c6; white-space: pre-line">
-                  {{ data.content }}
-                </span>
-              </ng-container>
-            </div>
-            <ng-template #editMode>
-              <form action="" [formGroup]="cmtForm">
-                <textarea
-                  [(ngModel)]="editedContent"
-                  formControlName="editContent"
-                  cols="30"
-                  rows="1"
-                  style="
-                    color: #cfc9bf;
-                    white-space: pre-line;
-                    resize: none;
-                    background-color: #272727;
-                    border: none;
-                    border-radius: 8px;
-                    padding: 10px;
-                  "
-                ></textarea>
-                <div
-                  style="display: flex; justify-content: flex-end; gap: 10px"
-                >
-                  <div (click)="updateComment(data.id)">
-                    <span
-                      style="color: #9b9b9a; cursor: pointer; font-size: 12px"
-                      >Lưu</span
-                    >
-                  </div>
-                  <div (click)="cancelEdit()">
-                    <span
-                      style="color: #9b9b9a; cursor: pointer; font-size: 12px"
-                      >Hủy</span
-                    >
+          <ng-template #recursiveTemplate let-replies>
+            <div class="cmt-reply" *ngFor="let reply of replies">
+              <div style="display: flex">
+                <div class="suggest-item-content">
+                  <div class="item-image">
+                    <img
+                      *ngIf="reply.avatar !== null"
+                      width="100%"
+                      height="100%"
+                      [src]="configUrl + '/' + reply.avatar"
+                      alt=""
+                    />
+                    <img
+                      *ngIf="reply.avatar === null"
+                      width="100%"
+                      height="100%"
+                      src="https://i.stack.imgur.com/l60Hf.png"
+                      alt=""
+                    />
                   </div>
                 </div>
-              </form>
-            </ng-template>
-            <div class="handle-cmt" *ngIf="data.user_id === userId">
-              <span
-                *ngIf="editModeId !== data.id"
-                style="color: #5d5d5d; cursor: pointer; font-size: 12px"
-                (click)="startEditing(data.id, data.content)"
-              >
-                Sửa
-              </span>
+                <div class="cmts">
+                  <div
+                    style="
+                      background-color: #404040;
+                      display: flex;
+                      justify-content: center;
+                      flex-direction: column;
+                      border-radius: 8px;
+                      padding: 8px;
+                    "
+                  >
+                    <div class="item-name">{{ reply.name }}</div>
+                    <ng-container
+                      *ngIf="editModeId !== reply.id; else editMode"
+                    >
+                      <span style="color: #c6c6c6; white-space: pre-line">
+                        {{ reply.content }}
+                      </span>
+                    </ng-container>
+                  </div>
+                  <ng-template #editMode>
+                    <form action="" [formGroup]="cmtForm">
+                      <textarea
+                        [(ngModel)]="editedContent"
+                        formControlName="editContent"
+                        cols="30"
+                        rows="1"
+                        style="
+                          color: #cfc9bf;
+                          white-space: pre-line;
+                          resize: none;
+                          background-color: #272727;
+                          border: none;
+                          border-radius: 8px;
+                          padding: 10px;
+                        "
+                      ></textarea>
+                      <div
+                        style="
+                          display: flex;
+                          justify-content: flex-end;
+                          gap: 10px;
+                        "
+                      >
+                        <div (click)="updateComment(reply.id)">
+                          <span
+                            style="
+                              color: #9b9b9a;
+                              cursor: pointer;
+                              font-size: 12px;
+                            "
+                            >Lưu</span
+                          >
+                        </div>
+                        <div (click)="cancelEdit()">
+                          <span
+                            style="
+                              color: #9b9b9a;
+                              cursor: pointer;
+                              font-size: 12px;
+                            "
+                            >Hủy</span
+                          >
+                        </div>
+                      </div>
+                    </form>
+                  </ng-template>
+                  <div
+                    style="
+                      display: flex;
+                      flex-direction: row;
+                      justify-content: space-around;
+                      gap: 10px;
+                    "
+                  >
+                    <div class="handle-cmt" *ngIf="reply.user_id === userId">
+                      <span
+                        *ngIf="editModeId !== reply.id"
+                        style="color: #5d5d5d; cursor: pointer; font-size: 12px"
+                        (click)="startEditing(reply.id, reply.content)"
+                      >
+                        Sửa
+                      </span>
 
-              <span
-                (click)="deleteComment(data.id)"
-                style="color: #5d5d5d; cursor: pointer; font-size: 12px"
-                >Xóa
-              </span>
+                      <span
+                        (click)="deleteComment(reply.id)"
+                        style="color: #5d5d5d; cursor: pointer; font-size: 12px"
+                        >Xóa
+                      </span>
+                    </div>
+                    <span
+                      (click)="startReplying(reply.name, reply.id)"
+                      style="color: #5d5d5d; cursor: pointer; font-size: 12px"
+                      >Trả lời
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="reply.replies && reply.replies.length > 0">
+                <ng-container
+                  *ngTemplateOutlet="
+                    recursiveTemplate;
+                    context: { $implicit: reply.replies }
+                  "
+                ></ng-container>
+              </div>
             </div>
-          </div>
+          </ng-template>
         </div>
       </div>
       <form action="" [formGroup]="cmtForm">

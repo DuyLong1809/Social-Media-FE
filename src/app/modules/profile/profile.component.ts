@@ -31,6 +31,7 @@ export class ProfileComponent implements OnInit {
   friendStatusList: any[] = [];
   friendList: IUser[] = [];
   numberOfFriends: any[] = [];
+  countLikes: number = 0
 
   configUrl = environment.ApiUrl;
 
@@ -65,7 +66,6 @@ export class ProfileComponent implements OnInit {
         this.datas = result.data;
         this.posts = result.data.posts;
         this.friendList = result.data.friends;
-
         this.posts.forEach(post => {
           if (post.likes && post.likes.length > 0) {
             const userLiked = post.likes.some(like => like.user_id === this.userIdFromStorage && like.isLiked);

@@ -11,7 +11,10 @@ import { SnackBarComponent } from 'src/shared/snack-bar/snack-bar.component';
   styleUrls: ['./comment.component.scss']
 })
 export class CommentComponent {
-  
+
+  parentCommentId!: number;
+  currentName!: string;
+  reply: boolean = false;
   editModeId: number | null = null;
   editedContent!: string;
   cmtForm!: FormGroup;
@@ -51,15 +54,18 @@ export class CommentComponent {
   }
 
   ngOnInit() {
-    console.log(this.userId);
     this.getComment();
   }
 
-  getComment() {
+  startReplying(name: string, id: number) {
+    this.reply = true;
+    this.cmtForm.patchValue({ content: `@${name} ` });
+    this.parentCommentId = id;
+  }
+
+  getComment() {  
     this.handleService.getCommentbyPost(this.postId).subscribe((res: any) => {
       this.datas = res.data
-      console.log(this.datas);
-      
     })
   }
 
@@ -84,13 +90,35 @@ export class CommentComponent {
     )
   }
 
+  replyComment() {
+    const data = {
+      content: this.cmtForm.value.content,
+      user_id: this.userId,
+      post_id: this.postId,
+      parent_comment_id: this.parentCommentId
+    }
+
+    this.handleService.createReply(data).subscribe(
+      (res) => {
+        this.getComment()
+        this.cmtForm.patchValue({
+          content: '',
+        });
+        this.snackBar.openSnackBar('Bình luận thành công', 'successBar')
+      },
+      (error) => {
+        this.snackBar.openSnackBar('Bình luận thất bại', 'errorBar')
+      }
+    )
+  }
+
   updateComment(id: number) {
     const data = {
       content: this.cmtForm.value.editContent,
       user_id: this.userId,
       post_id: this.postId,
     }
-    
+
     this.handleService.updateComment(data, id).subscribe(
       (res) => {
         this.getComment()
@@ -111,7 +139,6 @@ export class CommentComponent {
     this.handleService.deleteComment(id, data).subscribe(
       (res) => {
         this.getComment()
-        this.dialogRef.close(true)
         this.snackBar.openSnackBar('Xóa bình luận thành công', 'successBar')
       },
       (error) => {
@@ -121,7 +148,11 @@ export class CommentComponent {
   }
 
   submit() {
-    this.createComment();
+    if (this.reply) {
+      this.replyComment()
+    } else {
+      this.createComment();
+    }
   }
 
   startEditing(commentId: number, content: string) {

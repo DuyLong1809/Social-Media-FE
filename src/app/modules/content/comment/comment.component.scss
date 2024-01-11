@@ -168,21 +168,28 @@ mat-icon {
   font-weight: 600;
 }
 
-.cmt{
+.cmt {
   padding: 8px;
   display: flex;
+  flex-direction: column;
 }
 
-.handle-cmt{
+.cmt-reply {
+  margin-left: 35px;
+  display: flex;
+  flex-direction: column;
+}
+
+.handle-cmt {
   display: flex;
   flex-direction: row;
   gap: 10px;
 }
 
-.cmts .handle-cmt span{
+.cmts .handle-cmt span {
   opacity: 0;
 }
 
-.cmts:hover .handle-cmt span{
+.cmts:hover .handle-cmt span {
   opacity: 1;
 }
