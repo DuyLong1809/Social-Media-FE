@@ -38,6 +38,7 @@ export interface IgetAllPost {
   images: IgetAllPostImage[];
   likes: ILikes[];
   comments: any[];
+  userLiked?: any;
   created_at: string;
   updated_at: string;
 }
@@ -60,6 +61,7 @@ export interface ILikes {
   user_id: number;
   post_id: number;
   isLiked: boolean;
+  userLikedCount?: number;
   created_at: string;
   updated_at: string;
 }

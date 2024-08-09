@@ -31,7 +31,6 @@ export class ProfileComponent implements OnInit {
   friendStatusList: any[] = [];
   friendList: IUser[] = [];
   numberOfFriends: any[] = [];
-  countLikes: number = 0
 
   configUrl = environment.ApiUrl;
 
@@ -67,9 +66,10 @@ export class ProfileComponent implements OnInit {
         this.posts = result.data.posts;
         this.friendList = result.data.friends;
         this.posts.forEach(post => {
+          post.userLiked = false;
           if (post.likes && post.likes.length > 0) {
             const userLiked = post.likes.some(like => like.user_id === this.userIdFromStorage && like.isLiked);
-            post.likes[0].isLiked = userLiked;
+            post.userLiked = userLiked;
           }
         });
 
@@ -81,6 +81,11 @@ export class ProfileComponent implements OnInit {
         })
       },
     );
+  }
+
+  getLikedCount(likes: any[]): number {
+    const likedCount = likes.filter(like => like.isLiked).length;
+    return likedCount;
   }
 
   OpenDialogConfirm(postId: number, userId: number) {
@@ -122,7 +127,7 @@ export class ProfileComponent implements OnInit {
     this.handleService.likePost(postId, params).subscribe((res) => {
       const postData = this.posts.find(post => post.id === postId);
       if (postData && postData.likes && postData.likes.length > 0) {
-        postData.likes[0].isLiked = res.data.like;
+        postData.userLiked = res.data.like;
       } else {
         postData!.likes = [{
           ...postData!.likes[0],
@@ -136,7 +141,7 @@ export class ProfileComponent implements OnInit {
     if (!data.likes || data.likes.length === 0) {
       return '#9d9d9d';
     }
-    return data.likes[0].isLiked ? '#f02849' : '#9d9d9d';
+    return data.userLiked ? '#f02849' : '#9d9d9d';
   }
 
   timeAgo(dateString: string | null) {
@@ -254,7 +259,7 @@ export class ProfileComponent implements OnInit {
           break;
 
         case 2:
-          if (this.userIdFromStorage === friendStatus.user_id) {
+          if (this.userIdFromStorage === friendStatus.user_id && this.userIdFromStorage === friendStatus.friend_id) {
             this.cancelFriend(friendId);
           } else {
             this.addFriend();

@@ -20,8 +20,8 @@ export class ContentComponent {
   userId!: number | null;
   avatarUser!: string | null;
   nameUser!: string | null;
-  configUrl = environment.ApiUrl;
   countLikes!: number;
+  configUrl = environment.ApiUrl;
 
   slideConfig = {
     'arrows': true,
@@ -65,16 +65,22 @@ export class ContentComponent {
 
   getAllPost() {
     this.handleService.getAllPost().subscribe((res) => {
-      this.datas = res.data;    
+      this.datas = res.data;
       this.datas.forEach(post => {
+        post.userLiked = false;
         if (post.likes && post.likes.length > 0) {
           const userLiked = post.likes.some(like => like.user_id === this.userId && like.isLiked);
-          post.likes[0].isLiked = userLiked;
+          post.userLiked = userLiked;
         }
       });
     })
   }
 
+  getLikedCount(likes: any[]): number {
+    const likedCount = likes.filter(like => like.isLiked).length;
+    return likedCount;
+  }
+  
   OpenDialogCreateEditPost(editMode: boolean, postData: any) {
     const dialogRef = this.dialog.open(DialogCreatePostComponent, {
       disableClose: true,
@@ -114,7 +120,7 @@ export class ContentComponent {
     this.handleService.likePost(postId, params).subscribe((res) => {
       const postData = this.datas.find(post => post.id === postId);
       if (postData && postData.likes && postData.likes.length > 0) {
-        postData.likes[0].isLiked = res.data.like;
+        postData.userLiked = res.data.like;
       } else {
         postData!.likes = [{
           id: 0,
@@ -132,7 +138,7 @@ export class ContentComponent {
     if (!data.likes || data.likes.length === 0) {
       return '#9d9d9d';
     }
-    return data.likes[0].isLiked ? '#f02849' : '#9d9d9d';
+    return data.userLiked ? '#f02849' : '#9d9d9d';
   }
 
   openProfile(id: number) {

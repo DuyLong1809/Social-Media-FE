@@ -40,7 +40,7 @@ export class IntroduceComponent {
     this.isButtonActive = this.bio.trim() !== "";
   }
 
-  show() {
+  openEditProfile() {
 
   }
 }
